@@ -1,0 +1,19 @@
+current directory: /home/luiz-rattacaso/Desktop/projects/ruby_project/vendor/bundle/ruby/3.4.0/gems/erb-6.0.7/ext/erb/escape
+/home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/bin/ruby extconf.rb
+checking for rb_ext_ractor_safe() in ruby.h... yes
+creating Makefile
+
+current directory: /home/luiz-rattacaso/Desktop/projects/ruby_project/vendor/bundle/ruby/3.4.0/gems/erb-6.0.7/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20261016-73617-bj2nqp sitelibdir\=./.gem.20261016-73617-bj2nqp clean
+
+current directory: /home/luiz-rattacaso/Desktop/projects/ruby_project/vendor/bundle/ruby/3.4.0/gems/erb-6.0.7/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20261016-73617-bj2nqp sitelibdir\=./.gem.20261016-73617-bj2nqp
+compiling escape.c
+linking shared-object erb/escape.so
+
+current directory: /home/luiz-rattacaso/Desktop/projects/ruby_project/vendor/bundle/ruby/3.4.0/gems/erb-6.0.7/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20261016-73617-bj2nqp sitelibdir\=./.gem.20261016-73617-bj2nqp install
+/usr/bin/install -c -m 0755 escape.so ./.gem.20261016-73617-bj2nqp/erb
+
+current directory: /home/luiz-rattacaso/Desktop/projects/ruby_project/vendor/bundle/ruby/3.4.0/gems/erb-6.0.7/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20261016-73617-bj2nqp sitelibdir\=./.gem.20261016-73617-bj2nqp clean

@@ -1,0 +1,484 @@
+current directory: /home/luiz-rattacaso/Desktop/projects/ruby_project/vendor/bundle/ruby/3.4.0/gems/date-3.6.0/ext/date
+/home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/bin/ruby extconf.rb
+checking for rb_category_warn()... yes
+checking for timezone in time.h with -Werror... yes
+checking for altzone in time.h with -Werror... no
+checking for rb_gc_mark_movable() in ruby.h... yes
+checking for RUBY_TYPED_EMBEDDABLE in ruby.h... yes
+creating Makefile
+
+current directory: /home/luiz-rattacaso/Desktop/projects/ruby_project/vendor/bundle/ruby/3.4.0/gems/date-3.6.0/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20261016-73617-dl9edb sitelibdir\=./.gem.20261016-73617-dl9edb clean
+
+current directory: /home/luiz-rattacaso/Desktop/projects/ruby_project/vendor/bundle/ruby/3.4.0/gems/date-3.6.0/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20261016-73617-dl9edb sitelibdir\=./.gem.20261016-73617-dl9edb
+compiling date_core.c
+date_core.c: In function ‘datetime_s_jisx0301’:
+date_core.c:8894:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 8894 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME);
+date_core.c:8895:7: note: here
+ 8895 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘datetime_s_httpdate’:
+date_core.c:8850:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 8850 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME_HTTPDATE);
+date_core.c:8851:7: note: here
+ 8851 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘datetime_s_rfc2822’:
+date_core.c:8811:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 8811 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME_RFC3339);
+date_core.c:8812:7: note: here
+ 8812 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘datetime_s_xmlschema’:
+date_core.c:8771:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 8771 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME);
+date_core.c:8772:7: note: here
+ 8772 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘datetime_s_rfc3339’:
+date_core.c:8732:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 8732 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME);
+date_core.c:8733:7: note: here
+ 8733 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘datetime_s_iso8601’:
+date_core.c:8693:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 8693 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME);
+date_core.c:8694:7: note: here
+ 8694 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘datetime_s_parse’:
+date_core.c:8647:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 8647 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME);
+date_core.c:8648:7: note: here
+ 8648 |       case 1:
+      |       ^~~~
+date_core.c:8649:14: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 8649 |         comp = Qtrue;
+date_core.c:8650:7: note: here
+ 8650 |       case 2:
+      |       ^~~~
+date_core.c: In function ‘datetime_s_strptime’:
+date_core.c:8595:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 8595 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME);
+date_core.c:8596:7: note: here
+ 8596 |       case 1:
+      |       ^~~~
+date_core.c:8597:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 8597 |         fmt = rb_str_new2("%FT%T%z");
+date_core.c:8598:7: note: here
+ 8598 |       case 2:
+      |       ^~~~
+date_core.c: In function ‘datetime_s_commercial’:
+date_core.c:3554:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3554 |     if (!c_valid_start_p(dsg)) {\
+      |        ^
+date_core.c:8150:9: note: in expansion of macro ‘val2sg’
+ 8150 |         val2sg(vsg, sg);
+      |         ^~~~~~
+date_core.c:8151:7: note: here
+ 8151 |       case 7:
+      |       ^~~~
+date_core.c:5290:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 5290 |     if (!offset_to_sec(vof, &iof)) {\
+      |        ^
+date_core.c:8152:9: note: in expansion of macro ‘val2off’
+ 8152 |         val2off(vof, rof);
+      |         ^~~~~~~
+date_core.c:8153:7: note: here
+ 8153 |       case 6:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:8155:9: note: in expansion of macro ‘num2int_with_frac’
+ 8155 |         num2int_with_frac(s, positive_inf);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:8156:7: note: here
+ 8156 |       case 5:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:8158:9: note: in expansion of macro ‘num2int_with_frac’
+ 8158 |         num2int_with_frac(min, 5);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:8159:7: note: here
+ 8159 |       case 4:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:8161:9: note: in expansion of macro ‘num2int_with_frac’
+ 8161 |         num2int_with_frac(h, 4);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:8162:7: note: here
+ 8162 |       case 3:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:8164:9: note: in expansion of macro ‘num2int_with_frac’
+ 8164 |         num2int_with_frac(d, 3);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:8165:7: note: here
+ 8165 |       case 2:
+      |       ^~~~
+In file included from /home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/internal/arithmetic/char.h:23,
+                 from /home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/internal/arithmetic.h:24,
+                 from /home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/ruby.h:28,
+                 from /home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby.h:38,
+                 from date_core.c:5:
+/home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/internal/arithmetic/int.h:38:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+   38 | #define RB_NUM2INT  rb_num2int_inline  /**< @alias{rb_num2int_inline} */
+/home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/internal/arithmetic/int.h:44:20: note: in expansion of macro ‘RB_NUM2INT’
+   44 | #define NUM2INT    RB_NUM2INT          /**< @old{RB_NUM2INT} */
+      |                    ^~~~~~~~~~
+date_core.c:8167:13: note: in expansion of macro ‘NUM2INT’
+ 8167 |         w = NUM2INT(vw);
+      |             ^~~~~~~
+date_core.c:8168:7: note: here
+ 8168 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘datetime_initialize’:
+date_core.c:3554:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3554 |     if (!c_valid_start_p(dsg)) {\
+      |        ^
+date_core.c:8046:9: note: in expansion of macro ‘val2sg’
+ 8046 |         val2sg(vsg, sg);
+      |         ^~~~~~
+date_core.c:8047:7: note: here
+ 8047 |       case 7:
+      |       ^~~~
+date_core.c:5290:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 5290 |     if (!offset_to_sec(vof, &iof)) {\
+      |        ^
+date_core.c:8048:9: note: in expansion of macro ‘val2off’
+ 8048 |         val2off(vof, rof);
+      |         ^~~~~~~
+date_core.c:8049:7: note: here
+ 8049 |       case 6:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:8051:9: note: in expansion of macro ‘num2int_with_frac’
+ 8051 |         num2int_with_frac(s, positive_inf);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:8052:7: note: here
+ 8052 |       case 5:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:8054:9: note: in expansion of macro ‘num2int_with_frac’
+ 8054 |         num2int_with_frac(min, 5);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:8055:7: note: here
+ 8055 |       case 4:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:8057:9: note: in expansion of macro ‘num2int_with_frac’
+ 8057 |         num2int_with_frac(h, 4);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:8058:7: note: here
+ 8058 |       case 3:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:8060:9: note: in expansion of macro ‘num2int_with_frac’
+ 8060 |         num2int_with_frac(d, 3);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:8061:7: note: here
+ 8061 |       case 2:
+      |       ^~~~
+/home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/internal/arithmetic/int.h:38:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+   38 | #define RB_NUM2INT  rb_num2int_inline  /**< @alias{rb_num2int_inline} */
+/home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/internal/arithmetic/int.h:44:20: note: in expansion of macro ‘RB_NUM2INT’
+   44 | #define NUM2INT    RB_NUM2INT          /**< @old{RB_NUM2INT} */
+      |                    ^~~~~~~~~~
+date_core.c:8063:13: note: in expansion of macro ‘NUM2INT’
+ 8063 |         m = NUM2INT(vm);
+      |             ^~~~~~~
+date_core.c:8064:7: note: here
+ 8064 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘datetime_s_ordinal’:
+date_core.c:3554:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3554 |     if (!c_valid_start_p(dsg)) {\
+      |        ^
+date_core.c:7963:9: note: in expansion of macro ‘val2sg’
+ 7963 |         val2sg(vsg, sg);
+      |         ^~~~~~
+date_core.c:7964:7: note: here
+ 7964 |       case 6:
+      |       ^~~~
+date_core.c:5290:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 5290 |     if (!offset_to_sec(vof, &iof)) {\
+      |        ^
+date_core.c:7965:9: note: in expansion of macro ‘val2off’
+ 7965 |         val2off(vof, rof);
+      |         ^~~~~~~
+date_core.c:7966:7: note: here
+ 7966 |       case 5:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:7968:9: note: in expansion of macro ‘num2int_with_frac’
+ 7968 |         num2int_with_frac(s, positive_inf);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:7969:7: note: here
+ 7969 |       case 4:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:7971:9: note: in expansion of macro ‘num2int_with_frac’
+ 7971 |         num2int_with_frac(min, 4);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:7972:7: note: here
+ 7972 |       case 3:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:7974:9: note: in expansion of macro ‘num2int_with_frac’
+ 7974 |         num2int_with_frac(h, 3);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:7975:7: note: here
+ 7975 |       case 2:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:7977:9: note: in expansion of macro ‘num2int_with_frac’
+ 7977 |         num2int_with_frac(d, 2);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:7978:7: note: here
+ 7978 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘datetime_s_jd’:
+date_core.c:3554:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3554 |     if (!c_valid_start_p(dsg)) {\
+      |        ^
+date_core.c:7890:9: note: in expansion of macro ‘val2sg’
+ 7890 |         val2sg(vsg, sg);
+      |         ^~~~~~
+date_core.c:7891:7: note: here
+ 7891 |       case 5:
+      |       ^~~~
+date_core.c:5290:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 5290 |     if (!offset_to_sec(vof, &iof)) {\
+      |        ^
+date_core.c:7892:9: note: in expansion of macro ‘val2off’
+ 7892 |         val2off(vof, rof);
+      |         ^~~~~~~
+date_core.c:7893:7: note: here
+ 7893 |       case 4:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:7895:9: note: in expansion of macro ‘num2int_with_frac’
+ 7895 |         num2int_with_frac(s, positive_inf);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:7896:7: note: here
+ 7896 |       case 3:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:7898:9: note: in expansion of macro ‘num2int_with_frac’
+ 7898 |         num2int_with_frac(min, 3);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:7899:7: note: here
+ 7899 |       case 2:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:7901:9: note: in expansion of macro ‘num2int_with_frac’
+ 7901 |         num2int_with_frac(h, 2);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:7902:7: note: here
+ 7902 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘date_initialize’:
+date_core.c:3554:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3554 |     if (!c_valid_start_p(dsg)) {\
+      |        ^
+date_core.c:3752:9: note: in expansion of macro ‘val2sg’
+ 3752 |         val2sg(vsg, sg);
+      |         ^~~~~~
+date_core.c:3753:7: note: here
+ 3753 |       case 3:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:3755:9: note: in expansion of macro ‘num2int_with_frac’
+ 3755 |         num2int_with_frac(d, positive_inf);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:3756:7: note: here
+ 3756 |       case 2:
+      |       ^~~~
+/home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/internal/arithmetic/int.h:38:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+   38 | #define RB_NUM2INT  rb_num2int_inline  /**< @alias{rb_num2int_inline} */
+/home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/internal/arithmetic/int.h:44:20: note: in expansion of macro ‘RB_NUM2INT’
+   44 | #define NUM2INT    RB_NUM2INT          /**< @old{RB_NUM2INT} */
+      |                    ^~~~~~~~~~
+date_core.c:3758:13: note: in expansion of macro ‘NUM2INT’
+ 3758 |         m = NUM2INT(vm);
+      |             ^~~~~~~
+date_core.c:3759:7: note: here
+ 3759 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘date_s_jisx0301’:
+date_core.c:5221:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 5221 |         str = rb_str_new2(JULIAN_EPOCH_DATE);
+date_core.c:5222:7: note: here
+ 5222 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘date_s_httpdate’:
+date_core.c:5149:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 5149 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME_HTTPDATE);
+date_core.c:5150:7: note: here
+ 5150 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘date_s_rfc2822’:
+date_core.c:5081:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 5081 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME_RFC3339);
+date_core.c:5082:7: note: here
+ 5082 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘date_s_xmlschema’:
+date_core.c:5011:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 5011 |         str = rb_str_new2(JULIAN_EPOCH_DATE);
+date_core.c:5012:7: note: here
+ 5012 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘date_s_rfc3339’:
+date_core.c:4943:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 4943 |         str = rb_str_new2(JULIAN_EPOCH_DATETIME);
+date_core.c:4944:7: note: here
+ 4944 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘date_s_iso8601’:
+date_core.c:4873:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 4873 |         str = rb_str_new2(JULIAN_EPOCH_DATE);
+date_core.c:4874:7: note: here
+ 4874 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘date_s_parse’:
+date_core.c:4794:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 4794 |         str = rb_str_new2(JULIAN_EPOCH_DATE);
+date_core.c:4795:7: note: here
+ 4795 |       case 1:
+      |       ^~~~
+date_core.c:4796:14: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 4796 |         comp = Qtrue;
+date_core.c:4797:7: note: here
+ 4797 |       case 2:
+      |       ^~~~
+date_core.c: In function ‘date_s_strptime’:
+date_core.c:4651:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 4651 |         str = rb_str_new2(JULIAN_EPOCH_DATE);
+date_core.c:4652:7: note: here
+ 4652 |       case 1:
+      |       ^~~~
+date_core.c:4653:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 4653 |         fmt = rb_str_new2("%F");
+date_core.c:4654:7: note: here
+ 4654 |       case 2:
+      |       ^~~~
+date_core.c: In function ‘date_s_commercial’:
+date_core.c:3554:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3554 |     if (!c_valid_start_p(dsg)) {\
+      |        ^
+date_core.c:3853:9: note: in expansion of macro ‘val2sg’
+ 3853 |         val2sg(vsg, sg);
+      |         ^~~~~~
+date_core.c:3854:7: note: here
+ 3854 |       case 3:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:3856:9: note: in expansion of macro ‘num2int_with_frac’
+ 3856 |         num2int_with_frac(d, positive_inf);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:3857:7: note: here
+ 3857 |       case 2:
+      |       ^~~~
+/home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/internal/arithmetic/int.h:38:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+   38 | #define RB_NUM2INT  rb_num2int_inline  /**< @alias{rb_num2int_inline} */
+/home/luiz-rattacaso/.local/share/mise/installs/ruby/3.4.11/include/ruby-3.4.0/ruby/internal/arithmetic/int.h:44:20: note: in expansion of macro ‘RB_NUM2INT’
+   44 | #define NUM2INT    RB_NUM2INT          /**< @old{RB_NUM2INT} */
+      |                    ^~~~~~~~~~
+date_core.c:3859:13: note: in expansion of macro ‘NUM2INT’
+ 3859 |         w = NUM2INT(vw);
+      |             ^~~~~~~
+date_core.c:3860:7: note: here
+ 3860 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘date_s_ordinal’:
+date_core.c:3554:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3554 |     if (!c_valid_start_p(dsg)) {\
+      |        ^
+date_core.c:3669:9: note: in expansion of macro ‘val2sg’
+ 3669 |         val2sg(vsg, sg);
+      |         ^~~~~~
+date_core.c:3670:7: note: here
+ 3670 |       case 2:
+      |       ^~~~
+date_core.c:3530:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3530 |     if (f_nonzero_p(fr)) {\
+      |        ^
+date_core.c:3672:9: note: in expansion of macro ‘num2int_with_frac’
+ 3672 |         num2int_with_frac(d, positive_inf);
+      |         ^~~~~~~~~~~~~~~~~
+date_core.c:3673:7: note: here
+ 3673 |       case 1:
+      |       ^~~~
+date_core.c: In function ‘date_s_jd’:
+date_core.c:3554:8: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ 3554 |     if (!c_valid_start_p(dsg)) {\
+      |        ^
+date_core.c:3602:9: note: in expansion of macro ‘val2sg’
+ 3602 |         val2sg(vsg, sg);
+      |         ^~~~~~
+date_core.c:3603:7: note: here
+ 3603 |       case 1:
+      |       ^~~~
+At top level:
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling date_parse.c
+compiling date_strftime.c
+date_strftime.c: In function ‘date_strftime_with_tmx’:
+date_strftime.c:573:21: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  573 |             padding = '0';
+      |             ~~~~~~~~^~~~~
+date_strftime.c:574:11: note: here
+  574 |           case '1':  case '2': case '3': case '4':
+      |           ^~~~
+At top level:
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling date_strptime.c
+linking shared-object date_core.so
+
+current directory: /home/luiz-rattacaso/Desktop/projects/ruby_project/vendor/bundle/ruby/3.4.0/gems/date-3.6.0/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20261016-73617-dl9edb sitelibdir\=./.gem.20261016-73617-dl9edb install
+/usr/bin/install -c -m 0755 date_core.so ./.gem.20261016-73617-dl9edb
+
+current directory: /home/luiz-rattacaso/Desktop/projects/ruby_project/vendor/bundle/ruby/3.4.0/gems/date-3.6.0/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20261016-73617-dl9edb sitelibdir\=./.gem.20261016-73617-dl9edb clean
