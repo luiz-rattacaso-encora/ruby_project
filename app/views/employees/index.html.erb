@@ -2,11 +2,11 @@
 
 <% @employees.each do |employee| %>
     <div>
-        <p><strong><%= employee.name %></strong> - <%= employee.role %></p>
+        <p><strong><%= employee.first_name %> <%= employee.last_name %></strong> - <%= employee.role %></p>
         <p>Team Members (<%= employee.team_members.count %>): </p>
         <ul>
             <% employee.team_members.each do |member| %>
-                <li><%= member.name %> - <%= member.role %></li>
+                <li><%= member.first_name %> <%= member.last_name %> = <%= member.role %></li>
             <% end %>
         </ul>
         <hr>
