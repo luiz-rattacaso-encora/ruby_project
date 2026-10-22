@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   # root "posts#index"
   # get '/', controller: 'home', action: 'index'
   root "home#index"
-  get "/login", to: 'login#index'
+  get "/login", to: "login#index"
   
-  resources :employees, only: [:index, :new, :create]
+  resources :employees, only: [ :index, :new, :create ]
 
   # resources :employees, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
