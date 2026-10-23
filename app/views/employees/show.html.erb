@@ -1,5 +1,9 @@
 <h2>Employee information <% :id %></h2>
 
+<%= link_to "Back", "/employees" %>
+<%= link_to "Edit", "/employee/#{@product}/edit" %>
+<%= button_to "Delete", @employee, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+
 <div>
     <p><strong><%= @employee.first_name %> <%= @employee.last_name %></strong> - <%= @employee.role %></p>
     <p>Team Members (<%= @employee.team_members.count %>): </p>
