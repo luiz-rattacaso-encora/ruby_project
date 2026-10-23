@@ -38,6 +38,20 @@ class EmployeesController < ApplicationController
         redirect_to "/employees"
     end
 
+    def edit
+        @employee = Employee.find(params[:id])
+    end
+
+    def update
+        @employee = Employee.find(params[:id])
+
+        if @employee.update(employee_params)
+            redirect_to "/employees/#{params[:id]}"
+        else
+            render :edit
+        end
+    end
+
     private
     def set_employee
         @employee = Employee.find(params[:id])
