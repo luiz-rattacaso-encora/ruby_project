@@ -1,0 +1,38 @@
+<h2>Form to edit employee <%= @employee.first_name %> <%= @employee.last_name %></h2>
+
+<%= form_with model: @employee, data: { turbo: false } do |f| %>
+
+  <p>
+    <%= f.label :first_name, "First name:" %>
+    <%= f.text_field :first_name %>
+  </p>
+
+  <p>
+    <%= f.label :last_name, "Last name:" %>
+    <%= f.text_field :last_name %>
+  </p>
+
+  <p>
+    <%= f.label :role, "Role:" %>
+    <%= f.text_field :role %>
+  </p>
+
+  <p>
+    <%= f.label :is_manager, "Is this employee a manager?" %><br>
+    <%= f.radio_button :is_manager, true %>
+    <%= f.label :is_manager_true, "Yes" %>
+    
+    <%= f.radio_button :is_manager, false, checked: true %>
+    <%= f.label :is_manager_false, "No" %>
+  </p>
+
+  <p>
+    <%= f.label :manager_id, "Manager ID:" %>
+    <%= f.text_field :manager_id %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

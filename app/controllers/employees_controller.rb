@@ -21,6 +21,20 @@ class EmployeesController < ApplicationController
         @employee = Employee.find(params[:id])
     end
 
+    def edit
+        @employee = Employee.find(params[:id])
+    end
+
+    def update
+        @employee = Employee.find(params[:id])
+
+        if @employee.update(employee_params)
+            redirect_to "/employees/#{params[:id]}"
+        else
+            render :edit
+        end
+    end
+
     private
     def employee_params
         params.expect(employee: [ :first_name, :last_name, :role, :is_manager, :manager_id ])

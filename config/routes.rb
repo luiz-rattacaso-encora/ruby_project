@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root "home#index"
   get "/login", to: "login#index"
   
-  resources :employees, only: [ :index, :new, :create , :show]
+  resources :employees, only: [ :index, :new, :create , :show, :edit, :update ]
 
   # resources :employees, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
