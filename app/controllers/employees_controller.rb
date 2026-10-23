@@ -1,4 +1,6 @@
 class EmployeesController < ApplicationController
+    before_action :set_employee, only: [ :show, :edit, :update, :destroy ]
+
     def index
         @employees = Employee.all
     end
@@ -18,7 +20,22 @@ class EmployeesController < ApplicationController
     end
 
     def show
-        @employee = Employee.find(params[:id])
+    end
+
+    def edit
+    end
+
+    def update
+        if @employee.update(employee_params)
+            redirect_to "/employees/#{params[:id]}"
+        else
+            render :edit
+        end
+    end
+
+    def destroy
+        @employee.destroy
+        redirect_to "/employees"
     end
 
     def edit
@@ -36,6 +53,10 @@ class EmployeesController < ApplicationController
     end
 
     private
+    def set_employee
+        @employee = Employee.find(params[:id])
+    end
+
     def employee_params
         params.expect(employee: [ :first_name, :last_name, :role, :is_manager, :manager_id ])
     end

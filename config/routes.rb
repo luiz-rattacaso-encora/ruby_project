@@ -4,10 +4,8 @@ Rails.application.routes.draw do
   # get '/', controller: 'home', action: 'index'
   root "home#index"
   get "/login", to: "login#index"
-  
-  resources :employees, only: [ :index, :new, :create , :show, :edit, :update ]
 
-  # resources :employees, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  resources :employees, only: [ :index, :new, :create, :show, :edit, :update, :destroy ]
 
   # get '/employees', controller: 'employees', action: 'index'
   # get '/employees/new', controller: 'employees', action: 'new' --> form before create
