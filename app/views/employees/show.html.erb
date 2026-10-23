@@ -1,0 +1,13 @@
+<h2>Employee information <% :id %></h2>
+
+<div>
+    <p><strong><%= @employee.first_name %> <%= @employee.last_name %></strong> - <%= @employee.role %></p>
+    <p>Team Members (<%= @employee.team_members.count %>): </p>
+    <ul>
+        <% @employee.team_members.each do |member| %>
+            <li><%= member.first_name %> <%= member.last_name %> = <%= member.role %></li>
+        <% end %>
+    </ul>
+    <hr>
+    <br>
+</div>

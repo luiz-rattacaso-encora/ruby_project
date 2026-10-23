@@ -8,7 +8,17 @@ class EmployeesController < ApplicationController
     end
 
     def create
-        @employee = Employee.create(employee_params)
+        @employee = Employee.new(employee_params)
+
+        if @employee.save
+            redirect_to "/employees"
+        else
+            render :new
+        end
+    end
+
+    def show
+        @employee = Employee.find(params[:id])
     end
 
     private
