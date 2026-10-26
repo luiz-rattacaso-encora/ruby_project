@@ -1,5 +1,5 @@
 class Employee < ApplicationRecord
-  validates :first_name, :last_name, :role, :manager_id, presence: true
+  validates :first_name, :last_name, :role, presence: true
 
   belongs_to :manager, class_name: "Employee", optional: true
 
