@@ -22,13 +22,13 @@
     <%= f.radio_button :is_manager, true %>
     <%= f.label :is_manager_true, "Yes" %>
     
-    <%= f.radio_button :is_manager, false, checked: true %>
+    <%= f.radio_button :is_manager, false %>
     <%= f.label :is_manager_false, "No" %>
   </p>
 
   <div class="field">
-    <%= f.label :manager_id, "Selecionar Gerente" %>
-    <%= f.collection_select :manager_id, Employee.where.not(id: @employee.id), :id, :full_name_with_role, include_blank: "Not defined" %>
+    <%= f.label :manager_id, "Select Manager" %>
+    <%= f.collection_select :manager_id, @manager , :id, :full_name_with_role, include_blank: "Not defined" %>
   </div>
 
   <p>

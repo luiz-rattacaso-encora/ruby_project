@@ -1,5 +1,6 @@
 class EmployeesController < ApplicationController
     before_action :set_employee, only: [ :show, :edit, :update, :destroy ]
+    before_action :select_manager, only: [ :new, :edit ]
 
     def index
         @employees = Employee.all
@@ -55,6 +56,10 @@ class EmployeesController < ApplicationController
     private
     def set_employee
         @employee = Employee.find(params[:id])
+    end
+
+    def select_manager
+      @manager = Employee.where.not(id: @employee.id).where(is_manager: true)
     end
 
     def employee_params
