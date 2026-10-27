@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   root "home#index"
-  get "/login", to: "login#index"
-
+  get "/employees/all", controller: "employees", action: "all"
   resources :employees, only: [ :index, :new, :create, :show, :edit, :update, :destroy ]
 
   # get '/employees', controller: 'employees', action: 'index'

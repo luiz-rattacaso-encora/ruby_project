@@ -1,4 +1,9 @@
-<h2>Employees</h2>
+<% if @employees.empty? %>
+    <h2>No members yet</h2>
+<% else %>
+    <h2>Hi, here is your direct employees</h2>
+<% end %>
+
 
 <% @employees.each do |employee| %>
     <div>

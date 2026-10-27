@@ -3,6 +3,10 @@ class EmployeesController < ApplicationController
     before_action :select_manager, only: [ :new, :edit ]
 
     def index
+        @employees = Employee.where(manager_id: Current.user.id)
+    end
+
+    def all
         @employees = Employee.all
     end
 

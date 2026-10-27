@@ -1,0 +1,17 @@
+<h2>Employees</h2>
+
+<% @employees.each do |employee| %>
+    <div>
+        <%= link_to "/employees/#{employee.id}" do %>
+            <strong><%= employee.first_name %> <%= employee.last_name %></strong> - <%= employee.role %>
+        <% end %>
+        <p>Team Members (<%= employee.team_members.count %>): </p>
+        <ul>
+            <% employee.team_members.each do |member| %>
+                <li><%= member.first_name %> <%= member.last_name %> = <%= member.role %></li>
+            <% end %>
+        </ul>
+        <hr>
+        <br>
+    </div>
+<% end %>
