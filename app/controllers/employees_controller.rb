@@ -3,6 +3,10 @@ class EmployeesController < ApplicationController
     before_action :select_manager, only: [ :new, :edit ]
 
     def index
+        @employees = Employee.where(manager_id: Current.user.id)
+    end
+
+    def all
         @employees = Employee.all
     end
 
@@ -39,27 +43,17 @@ class EmployeesController < ApplicationController
         redirect_to "/employees"
     end
 
-    def edit
-        @employee = Employee.find(params[:id])
-    end
-
-    def update
-        @employee = Employee.find(params[:id])
-
-        if @employee.update(employee_params)
-            redirect_to "/employees/#{params[:id]}"
-        else
-            render :edit
-        end
-    end
-
     private
     def set_employee
         @employee = Employee.find(params[:id])
     end
 
     def select_manager
-      @manager = Employee.where.not(id: @employee.id).where(is_manager: true)
+        if @employee&.id
+            @manager = Employee.where.not(id: @employee.id).where(is_manager: true)
+        else
+            @manager = Employee.where(is_manager: true)
+        end
     end
 
     def employee_params
