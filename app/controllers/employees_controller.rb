@@ -63,6 +63,6 @@ class EmployeesController < ApplicationController
     end
 
     def employee_params
-        params.expect(employee: [ :first_name, :last_name, :role, :is_manager, :manager_id ])
+        params.expect(employee: [ :first_name, :last_name, :role, :is_manager, :manager_id, :user_id ])
     end
 end

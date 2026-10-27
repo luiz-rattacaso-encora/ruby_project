@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_26_171720) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_174041) do
   create_table "employees", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "role"
@@ -19,7 +19,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_171720) do
     t.datetime "updated_at", null: false
     t.boolean "is_manager", default: false, null: false
     t.string "last_name", null: false
+    t.bigint "user_id"
     t.index ["manager_id"], name: "index_employees_on_manager_id"
+    t.index ["user_id"], name: "index_employees_on_user_id"
   end
 
   create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -40,5 +42,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_171720) do
   end
 
   add_foreign_key "employees", "employees", column: "manager_id"
+  add_foreign_key "employees", "users"
   add_foreign_key "sessions", "users"
 end
