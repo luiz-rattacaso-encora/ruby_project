@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
     before_action :set_employee, only: [ :show, :edit, :update, :destroy ]
     before_action :employee_is_allowed_to_edit?, only: [ :edit, :update ]
+    before_action :employee_is_allowed_to_create_and_destroy?, only: [ :new, :destroy ]
     before_action :select_manager, only: [ :new, :edit ]
 
     def index
@@ -61,7 +62,15 @@ class EmployeesController < ApplicationController
       policy = EmployeePolicy.new(Current.user, @employee)
 
         unless policy.can_update?
-            redirect_to "/", alert: "You are not alloed to "
+            redirect_to "/", alert: "You are not alloed to update"
+        end
+    end
+
+    def employee_is_allowed_to_create_and_destroy?
+        policy = EmployeePolicy.new(Current.user, @employee)
+
+        unless policy.can_create_and_destroy?
+            redirect_to "/", alert: "You are not alloed to create or delete an employee"
         end
     end
 
