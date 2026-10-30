@@ -6,16 +6,31 @@
     <%= f.label :first_name, "First name:" %>
     <%= f.text_field :first_name %>
   </p>
+  <% if @employee.errors[:first_name].any? %>
+    <div style="color: red; font-size: 0.85rem; margin-top: -10px; margin-bottom: 10px;">
+      <%= @employee.errors.full_messages_for(:first_name).join(", ") %>
+    </div>
+  <% end %>
 
   <p>
     <%= f.label :last_name, "Last name:" %>
     <%= f.text_field :last_name %>
   </p>
+  <% if @employee.errors[:last_name].any? %>
+    <div style="color: red; font-size: 0.85rem; margin-top: -10px; margin-bottom: 10px;">
+      <%= @employee.errors.full_messages_for(:last_name).join(", ") %>
+    </div>
+  <% end %>
 
   <p>
     <%= f.label :role, "Role:" %>
     <%= f.text_field :role %>
   </p>
+  <% if @employee.errors[:role].any? %>
+    <div style="color: red; font-size: 0.85rem; margin-top: -10px; margin-bottom: 10px;">
+      <%= @employee.errors.full_messages_for(:role).join(", ") %>
+    </div>
+  <% end %>
 
   <p>
     <%= f.label :is_manager, "Is this employee a manager?" %><br>

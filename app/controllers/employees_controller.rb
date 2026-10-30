@@ -22,6 +22,7 @@ class EmployeesController < ApplicationController
         if @employee.save
             redirect_to "/employees"
         else
+            select_manager
             render :new
         end
     end
