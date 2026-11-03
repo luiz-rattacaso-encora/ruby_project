@@ -12,6 +12,17 @@ class Employee < ApplicationRecord
     "#{first_name} #{last_name} (#{role})"
   end
 
+  def reports_to
+    list = []
+    current_manager = manager
+
+    while current_manager
+      list.unshift(current_manager)
+      current_manager = current_manager.manager
+    end
+    list
+  end
+
   private
   def set_default_user_password
     if user && user.password.blank?
