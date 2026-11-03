@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-    before_action :set_employee, only: [ :show, :edit, :update, :destroy ]
+    before_action :set_employee, only: [ :show, :edit, :update, :destroy, :hierarchy ]
     before_action :employee_is_allowed_to_edit?, only: [ :edit, :update ]
     before_action :employee_is_allowed_to_create_and_destroy?, only: [ :new, :destroy ]
     before_action :select_manager, only: [ :new, :edit ]
@@ -29,6 +29,9 @@ class EmployeesController < ApplicationController
     end
 
     def show
+    end
+
+    def hierarchy
     end
 
     def edit
