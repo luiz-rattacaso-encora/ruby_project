@@ -14,6 +14,7 @@ class EmployeesController < ApplicationController
 
     def new
         @employee = Employee.new
+        @employee.build_user
     end
 
     def create
@@ -76,6 +77,6 @@ class EmployeesController < ApplicationController
     end
 
     def employee_params
-        params.expect(employee: [ :first_name, :last_name, :role, :is_manager, :manager_id, :user_id ])
+        params.expect(employee: [ :first_name, :last_name, :role, :is_manager, :manager_id, :user_id, user_attributes: [ :email_address, :password, :password_confirmation ] ])
     end
 end

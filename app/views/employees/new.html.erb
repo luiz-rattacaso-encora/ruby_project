@@ -22,6 +22,28 @@
     </div>
   <% end %>
 
+  <%= f.fields_for :user do |user_fields| %>
+    <p>
+      <%= user_fields.label :email_address, "Email Address:" %>
+      <%= user_fields.email_field :email_address %>
+    </p>
+    <% if @employee.errors["user.email_address"].any? %>
+      <div style="color: red; font-size: 0.85rem; margin-top: -10px; margin-bottom: 10px;">
+        Email <%= @employee.errors["user.email_address"].join(", ") %>
+      </div>
+    <% end %>
+
+    <p>
+      <%= user_fields.label :password, "Password:" %>
+      <%= user_fields.password_field :password, placeholder: "Leave empty to use default password" %>
+    </p>
+
+    <p>
+      <%= user_fields.label :password_confirmation, "Confirm Password:" %>
+      <%= user_fields.password_field :password_confirmation %>
+    </p>
+  <% end %>
+
   <p>
     <%= f.label :role, "Role:" %>
     <%= f.text_field :role %>
