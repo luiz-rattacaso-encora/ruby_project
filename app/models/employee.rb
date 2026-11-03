@@ -3,7 +3,10 @@ class Employee < ApplicationRecord
 
   belongs_to :manager, class_name: "Employee", optional: true
   belongs_to :user, optional: true
+
   has_many :team_members, class_name: "Employee", foreign_key: "manager_id"
+  has_many :memberships, dependent: :destroy
+  has_many :teams, through: :memberships
 
   accepts_nested_attributes_for :user
   before_validation :set_default_user_password, on: :create
