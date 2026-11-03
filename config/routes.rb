@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root "home#index"
   get "/employees/all", controller: "employees", action: "all"
+  get "/employees/:id/hierarchy", controller: "employees", action: "hierarchy"
   resources :employees, only: [ :index, :new, :create, :show, :edit, :update, :destroy ]
 
   # get '/employees', controller: 'employees', action: 'index'
