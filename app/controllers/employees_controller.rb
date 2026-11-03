@@ -67,7 +67,7 @@ class EmployeesController < ApplicationController
       policy = EmployeePolicy.new(Current.user, @employee)
 
         unless policy.can_update?
-            redirect_to "/", alert: "You are not alloed to update"
+            redirect_to "/", alert: "You are not alloed to update" and return
         end
     end
 
@@ -75,7 +75,7 @@ class EmployeesController < ApplicationController
         policy = EmployeePolicy.new(Current.user, @employee)
 
         unless policy.can_create_and_destroy?
-            redirect_to "/", alert: "You are not alloed to create or delete an employee"
+            redirect_to "/", alert: "You are not alloed to create or delete an employee" and return
         end
     end
 
