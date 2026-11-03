@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
     before_action :select_manager, only: [ :new, :edit ]
 
     def index
-        @employees = Employee.where(manager_id: Current.user.id)
+        @employees = Employee.find_by(user_id: Current.user.id)
     end
 
     def all
