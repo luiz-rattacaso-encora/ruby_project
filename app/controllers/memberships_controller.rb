@@ -26,6 +26,7 @@ class MembershipsController < ApplicationController
   end
 
   def destroy
+    update(finished_at: Time.current)
   end
 
   def show
