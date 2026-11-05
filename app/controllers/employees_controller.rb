@@ -24,7 +24,7 @@ class EmployeesController < ApplicationController
             redirect_to "/employees"
         else
             select_manager
-            render :new
+            render :new and return
         end
     end
 
@@ -56,11 +56,8 @@ class EmployeesController < ApplicationController
     end
 
     def select_manager
-        if @employee&.id
-            @manager = Employee.where.not(id: @employee.id).where(is_manager: true)
-        else
-            @manager = Employee.where(is_manager: true)
-        end
+        current_user = Current.user.id
+        @manager = Employee.where.not(user_id: current_user).where(is_manager: true)
     end
 
     def employee_is_allowed_to_edit?
