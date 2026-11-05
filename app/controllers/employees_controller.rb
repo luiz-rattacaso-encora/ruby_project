@@ -24,7 +24,7 @@ class EmployeesController < ApplicationController
             redirect_to "/employees"
         else
             select_manager
-            render :new
+            render :new and return
         end
     end
 
