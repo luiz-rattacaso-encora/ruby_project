@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
     before_action :select_manager, only: [ :new, :edit ]
 
     def index
-        @employees = Employee.where(manager_id: Current.user.id)
+        @employees = Employee.find_by(user_id: Current.user.id)
     end
 
     def all
@@ -64,7 +64,7 @@ class EmployeesController < ApplicationController
       policy = EmployeePolicy.new(Current.user, @employee)
 
         unless policy.can_update?
-            redirect_to "/", alert: "You are not alloed to update"
+            redirect_to "/", alert: "You are not alloed to update" and return
         end
     end
 
@@ -72,7 +72,7 @@ class EmployeesController < ApplicationController
         policy = EmployeePolicy.new(Current.user, @employee)
 
         unless policy.can_create_and_destroy?
-            redirect_to "/", alert: "You are not alloed to create or delete an employee"
+            redirect_to "/", alert: "You are not alloed to create or delete an employee" and return
         end
     end
 

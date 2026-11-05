@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+  resources :teams
   resource :session
   resources :passwords, param: :token
 
   root "home#index"
   get "/employees/all", controller: "employees", action: "all"
   get "/employees/:id/hierarchy", controller: "employees", action: "hierarchy"
-  resources :employees, only: [ :index, :new, :create, :show, :edit, :update, :destroy ]
+  resources :employees
 
   # get '/employees', controller: 'employees', action: 'index'
   # get '/employees/new', controller: 'employees', action: 'new' --> form before create
