@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Membership Details</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <p>
+        <strong>Employee:</strong>
+        <%= @membership.employee.full_name_with_role %>
+      </p>
+
+      <p>
+        <strong>Team:</strong>
+        <%= @membership.team.name %>
+      </p>
+
+      <p>
+        <strong>Join at:</strong>
+        <%= @membership.created_at.strftime("%B %d, %Y %I:%M %p") %>
+      </p>
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top: 20px;">
+    <%= link_to "Edit", edit_membership_path(@membership), class: "btn btn-primary" %> |
+    <%= link_to "Back to List", memberships_path, class: "btn btn-secondary" %>
+  </div>
+</div>
