@@ -1,5 +1,10 @@
 class MembershipsController < ApplicationController
   before_action :set_member, only: [ :edit, :update ]
+
+  def index
+    @memberships = Membership.includes(:employee, :team).all
+  end
+
   def new
     @membership = Membership.new
   end
