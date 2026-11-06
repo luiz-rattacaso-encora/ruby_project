@@ -1,8 +1,8 @@
 class MembershipsController < ApplicationController
-  before_action :set_member, only: [ :edit, :update ]
+  before_action :set_member, only: [ :edit, :update, :show, :destroy ]
 
   def index
-    @memberships = Membership.includes(:employee, :team).all
+    @memberships = Membership.includes(:employee, :team).where(finished_at: nil)
   end
 
   def new
@@ -13,7 +13,7 @@ class MembershipsController < ApplicationController
     @membership = Membership.new(membership_params)
 
     if @membership.save
-      redirect_to "/teams"
+      redirect_to "/memberships"
     else
       render :new, alert: "Oops! something went wrong here"
     end
@@ -30,11 +30,17 @@ class MembershipsController < ApplicationController
   def edit
   end
 
-  def destroy
-    update(finished_at: Time.current)
-  end
+    def destroy
+      if @membership.update_column(:finished_at, Time.current)
+        redirect_to memberships_path, notice: "Membership was successfully finished."
+      else
+        redirect_to memberships_path, alert: "Could not finish membership."
+      end
+    end
+
 
   def show
+    @membership = Membership.includes(:employee, :team).find(params[:id])
   end
 
   private
