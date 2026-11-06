@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "/employees/all", controller: "employees", action: "all"
   get "/employees/:id/hierarchy", controller: "employees", action: "hierarchy"
   resources :employees
+  resources :memberships, only: [ :index, :show, :new, :create, :update, :edit, :destroy ]
 
   # get '/employees', controller: 'employees', action: 'index'
   # get '/employees/new', controller: 'employees', action: 'new' --> form before create

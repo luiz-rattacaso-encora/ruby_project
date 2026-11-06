@@ -1,0 +1,30 @@
+<h2>Add Employee to a Team (New Membership)</h2>
+
+<%= form_with model: @membership, data: { turbo: false } do |f| %>
+
+  <% if @membership.errors.any? %>
+    <div style="color: red; margin-bottom: 20px;">
+      <h4>Oops! Something went wrong here:</h4>
+      <ul>
+        <% @membership.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :employee_id, "Select Employee:" %>
+    <%= f.collection_select :employee_id, Employee.all, :id, :first_name, include_blank: "Select an employee..." %>
+  </p>
+
+  <p>
+    <%= f.label :team_id, "Select Team:" %>
+    <%= f.collection_select :team_id, Team.all, :id, :name, include_blank: "Select a team..." %>
+  </p>
+
+  <p>
+    <%= f.submit "Create Membership" %>
+  </p>
+
+<% end %>
