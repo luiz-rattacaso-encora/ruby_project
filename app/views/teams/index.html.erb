@@ -4,6 +4,18 @@
 
 <h1>Teams</h1>
 
+<%= form_with url: teams_path, method: :get, local: true do |form| %>
+  <div style="margin-bottom: 20px;">
+    <%= form.label :search_name, "Search by team name:", style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
+    <%= form.text_field :search_name, value: params[:search_name], placeholder: "Type a team name...", style: "padding: 5px; width: 250px;" %>
+    <%= form.submit "Search", style: "padding: 5px 10px; cursor: pointer;" %>
+    
+    <% if params[:search_name].present? %>
+      <%= link_to "Clear", teams_path, style: "margin-left: 10px; color: red; text-decoration: none;" %>
+    <% end %>
+  </div>
+<% end %>
+
 <div id="teams">
   <% @teams.each do |team| %>
     <%= render team %>

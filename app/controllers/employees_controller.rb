@@ -10,6 +10,10 @@ class EmployeesController < ApplicationController
 
     def all
         @employees = Employee.all
+
+        if params[:search_name].present?
+            @employees = @employees.by_name(params[:search_name])
+        end
     end
 
     def new

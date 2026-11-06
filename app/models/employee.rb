@@ -11,6 +11,12 @@ class Employee < ApplicationRecord
   accepts_nested_attributes_for :user
   before_validation :set_default_user_password, on: :create
 
+  scope :by_name, ->(name) {
+    if name.present?
+      where("CONCAT(first_name, ' ', last_name) LIKE ?", "%#{name}%")
+    end
+  }
+
   def full_name_with_role
     "#{first_name} #{last_name} (#{role})"
   end

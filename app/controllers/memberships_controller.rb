@@ -3,6 +3,10 @@ class MembershipsController < ApplicationController
 
   def index
     @memberships = Membership.includes(:employee, :team).where(finished_at: nil)
+
+    if params[:search_name].present?
+      @memberships = @memberships.joins(:employee).merge(Employee.by_name(params[:search_name]))
+    end
   end
 
   def new
