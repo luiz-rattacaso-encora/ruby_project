@@ -1,23 +1,41 @@
-<h2>Employees</h2>
+<h2>Employees (All)</h2>
 
+<br>
+<%= link_to "Back", "/" %>
 <br>
 <%= link_to "List of your team", "/employees" %>
 <br>
 <%= link_to "Add new member", "/employees/new" %>
 <br>
-<br>
-<% @employees.each do |employee| %>
-    <div>
-        <%= link_to "/employees/#{employee.id}" do %>
-            <strong><%= employee.first_name %> <%= employee.last_name %></strong> - <%= employee.role %>
-        <% end %>
-        <p>Team Members (<%= employee.team_members.count %>): </p>
-        <ul>
-            <% employee.team_members.each do |member| %>
-                <li><%= member.first_name %> <%= member.last_name %> = <%= member.role %></li>
-            <% end %>
-        </ul>
-        <hr>
-        <br>
-    </div>
+
+<%= form_with url: "/employees/all", method: :get, local: true do |form| %>
+  <div style="margin-bottom: 20px;">
+    <%= form.label :search_name, "Search by name:", style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
+    <%= form.text_field :search_name, value: params[:search_name], placeholder: "Type a name...", style: "padding: 5px; width: 250px;" %>
+    <%= form.submit "Search", style: "padding: 5px 10px; cursor: pointer;" %>
+    
+    <% if params[:search_name].present? %>
+      <%= link_to "Clear", "/employees/all", style: "margin-left: 10px; color: red; text-decoration: none;" %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @employees.present? %>
+  <% @employees.each do |employee| %>
+      <div>
+          <%= link_to "/employees/#{employee.id}" do %>
+              <strong><%= employee.first_name %> <%= employee.last_name %></strong> - <%= employee.role %>
+          <% end %>
+          <p>Team Members (<%= employee.team_members.count %>): </p>
+          <ul>
+              <% employee.team_members.each do |member| %>
+                  <li><%= member.first_name %> <%= member.last_name %> = <%= member.role %></li>
+              <% end %>
+          </ul>
+          <hr>
+          <br>
+      </div>
+  <% end %>
+<% else %>
+  <p>No employees found for this search.</p>
 <% end %>

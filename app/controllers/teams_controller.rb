@@ -4,6 +4,10 @@ class TeamsController < ApplicationController
   # GET /teams or /teams.json
   def index
     @teams = Team.all
+
+    if params[:search_name].present?
+      @teams = @teams.by_name(params[:search_name])
+    end
   end
 
   # GET /teams/1 or /teams/1.json

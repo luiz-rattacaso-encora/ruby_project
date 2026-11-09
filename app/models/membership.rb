@@ -5,6 +5,8 @@ class Membership < ApplicationRecord
   validates :employee_id, :team_id, presence: true
   validates :employee_id, uniqueness: { scope: :team_id, conditions: -> { where(finished_at: nil) }, message: "is already an active member of this team" }, if: :is_active_membership?
 
+  scope :by_name, ->(name) { where("name LIKE ?", "%#{name}%") if name.present? }
+
   private
 
   def is_active_membership?
