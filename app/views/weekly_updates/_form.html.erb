@@ -1,7 +1,7 @@
 <%= form_with(model: @weekly_update.new_record? ? [@team, @weekly_update] : @weekly_update) do |form| %>
   <% if @weekly_update.errors.any? %>
     <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
-      <h2><%= pluralize(@weekly_update.errors.count, "erro") %> do not allow this update to be safed:</h2>
+      <h2><%= pluralize(@weekly_update.errors.count, "error") %> prohibited this update from being saved:</h2>
       <ul>
         <% @weekly_update.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -21,6 +21,6 @@
   </div>
 
   <div>
-    <%= form.submit @weekly_update.new_record? ? "Criar Update Semanal" : "Atualizar Update Semanal" %>
+    <%= form.submit @weekly_update.new_record? ? "Create Weekly Update" : "Update Weekly Update" %>
   </div>
 <% end %>

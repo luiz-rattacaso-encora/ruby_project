@@ -19,7 +19,7 @@
           <td>
             <%= link_to "Show", weekly_update_path(update) %> |
             <%= link_to "Edit", edit_weekly_update_path(update) %> |
-            <%= link_to "Delete", weekly_update_path(update), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+            <%= button_to "Delete", weekly_update_path(update), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } %>
           </td>
         </tr>
       <% end %>
