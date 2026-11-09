@@ -14,12 +14,12 @@
     <tbody>
       <% @weekly_updates.each do |update| %>
         <tr>
-          <td><%= truncate(update.content, length: 100) %></td>
+          <td><%= auto_link(truncate(update.content, length: 100), html: { target: '_blank', rel: 'noopener' }) %></td>
           <td><span class="badge"><%= update.status.humanize %></span></td>
           <td>
             <%= link_to "Show", weekly_update_path(update) %> |
             <%= link_to "Edit", edit_weekly_update_path(update) %> |
-            <%= button_to "Delete", weekly_update_path(update), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } %>
+            <%= link_to "Delete", weekly_update_path(update), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
           </td>
         </tr>
       <% end %>
