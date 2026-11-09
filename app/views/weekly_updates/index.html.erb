@@ -1,0 +1,33 @@
+<h1>Team Weekly Updates: <%= @team.name %></h1>
+
+<%= link_to "New Weekly Update", new_team_weekly_update_path(@team), style: "display: inline-block; margin-bottom: 20px;" %>
+
+<% if @weekly_updates.any? %>
+  <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th>Content</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @weekly_updates.each do |update| %>
+        <tr>
+          <td><%= truncate(update.content, length: 100) %></td>
+          <td><span class="badge"><%= update.status.humanize %></span></td>
+          <td>
+            <%= link_to "Show", weekly_update_path(update) %> |
+            <%= link_to "Edit", edit_weekly_update_path(update) %> |
+            <%= link_to "Delete", weekly_update_path(update), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No weekly updates recorded for this team yet.</p>
+<% end %>
+
+<br>
+<%= link_to "Back to Team", team_path(@team) %>
