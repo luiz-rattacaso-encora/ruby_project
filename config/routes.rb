@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :teams
+  resources :teams do
+    resources :weekly_updates, shallow: true
+  end
   resource :session
   resources :passwords, param: :token
 
