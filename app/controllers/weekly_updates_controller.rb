@@ -4,7 +4,7 @@ class WeeklyUpdatesController < ApplicationController
 
   def index
     @weekly_updates = @team.weekly_updates.includes(:author)
-    @weekly_updates = @weekly_updates.by_author(params[:author_id])
+    @weekly_updates = @weekly_updates.by_author_name(params[:author_name])
     @weekly_updates = @weekly_updates.by_status(params[:status])
   end
 

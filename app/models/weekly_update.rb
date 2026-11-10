@@ -8,7 +8,11 @@ class WeeklyUpdate < ApplicationRecord
 
   before_save :set_published_date, if: :will_save_change_to_status?
 
-  scope :by_author, ->(author_id) { where(author_id: author_id) if author_id.present? }
+  scope :by_author_name, ->(name) {
+    if name.present?
+      joins(:author).where("CONCAT(employees.first_name, ' ', employees.last_name) LIKE ?", "%#{name}%")
+    end
+  }
   scope :by_status, ->(status) { where(status: status) if status.present? }
 
   private

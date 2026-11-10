@@ -5,8 +5,8 @@
 <%= form_with url: team_weekly_updates_path(@team), method: :get, local: true do |form| %>
   <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: flex-end;">
     <div>
-      <%= form.label :author_id, "Filter by Author:", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
-      <%= form.select :author_id, Employee.all.map { |e| ["#{e.first_name} #{e.last_name}", e.id] }, { include_blank: "All Authors", selected: params[:author_id] }, { style: "padding: 5px;" } %>
+      <%= form.label :author_name, "Filter by Author:", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+      <%= form.text_field :author_name, value: params[:author_name], placeholder: "Type a name...", style: "padding: 5px; width: 200px;" %>
     </div>
 
     <div>
@@ -16,7 +16,7 @@
 
     <div>
       <%= form.submit "Filter", style: "padding: 5px 10px; cursor: pointer;" %>
-      <% if params[:author_id].present? || params[:status].present? %>
+      <% if params[:author_name].present? || params[:status].present? %>
         <%= link_to "Clear", team_weekly_updates_path(@team), style: "margin-left: 10px; color: red; text-decoration: none;" %>
       <% end %>
     </div>
