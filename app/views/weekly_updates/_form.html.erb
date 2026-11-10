@@ -1,0 +1,26 @@
+<%= form_with(model: @weekly_update.new_record? ? [@team, @weekly_update] : @weekly_update) do |form| %>
+  <% if @weekly_update.errors.any? %>
+    <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
+      <h2><%= pluralize(@weekly_update.errors.count, "error") %> prohibited this update from being saved:</h2>
+      <ul>
+        <% @weekly_update.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :content, "Content", style: "display: block; font-weight: bold;" %>
+    <%= form.text_area :content, rows: 5, style: "width: 100%; max-width: 500px;" %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :status, "Status", style: "display: block; font-weight: bold;" %>
+    <%= form.select :status, WeeklyUpdate.statuses.keys.map { |s| [s.humanize, s] } %>
+  </div>
+
+  <div>
+    <%= form.submit @weekly_update.new_record? ? "Create Weekly Update" : "Update Weekly Update" %>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<h1>Weekly update details</h1>
+
+<p><strong>Team:</strong> <%= @weekly_update.team.name %></p>
+
+<p>
+  <strong>Status:</strong> 
+  <%= @weekly_update.status.humanize %>
+</p>
+
+<p>
+  <strong>Content:</strong><br>
+  <%= simple_format(@weekly_update.content) %>
+</p>
+
+<hr>
+
+<%= link_to "Edit this Content", edit_weekly_update_path(@weekly_update) %> |
+<%= link_to "Check all the updates from this team", team_weekly_updates_path(@weekly_update.team) %>

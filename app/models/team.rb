@@ -4,6 +4,7 @@ class Team < ApplicationRecord
 
   has_many :memberships, dependent: :destroy
   has_many :employees, through: :memberships
+  has_many :weekly_updates, dependent: :destroy
 
   attribute :technologies, :json, default: []
 

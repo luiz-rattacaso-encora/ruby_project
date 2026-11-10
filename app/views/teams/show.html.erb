@@ -4,7 +4,8 @@
 
 <div>
   <%= link_to "Edit this team", edit_team_path(@team) %> |
-  <%= link_to "Back to teams", teams_path %>
+  <%= link_to "Back to teams", teams_path %> | 
+  <%= link_to "Check notices updates from this team", team_weekly_updates_path(@team) %>
 
   <%= button_to "Destroy this team", @team, method: :delete %>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_04_200930) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_09_181639) do
   create_table "employees", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "role"
@@ -59,9 +59,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_200930) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  create_table "weekly_updates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "content"
+    t.string "status"
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_weekly_updates_on_team_id"
+  end
+
   add_foreign_key "employees", "employees", column: "manager_id"
   add_foreign_key "employees", "users"
   add_foreign_key "memberships", "employees"
   add_foreign_key "memberships", "teams"
   add_foreign_key "sessions", "users"
+  add_foreign_key "weekly_updates", "teams"
 end
