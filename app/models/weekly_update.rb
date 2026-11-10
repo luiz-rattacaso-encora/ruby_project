@@ -1,6 +1,21 @@
 class WeeklyUpdate < ApplicationRecord
   belongs_to :team
-  validates :content, :team_id, presence: true
+  belongs_to :author, class_name: "Employee"
+
+  validates :content, :team_id, :author_id, presence: true
 
   enum :status, { draft: "draft", published: "published", archived: "archived" }, default: :draft
+
+  before_save :set_published_date, if: :will_save_change_to_status?
+
+  scope :by_author, ->(author_id) { where(author_id: author_id) if author_id.present? }
+  scope :by_status, ->(status) { where(status: status) if status.present? }
+
+  private
+
+  def set_published_date
+    if published? && published_date.nil?
+      self.published_date = Time.current
+    end
+  end
 end
