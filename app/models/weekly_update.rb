@@ -14,6 +14,7 @@ class WeeklyUpdate < ApplicationRecord
     end
   }
   scope :by_status, ->(status) { where(status: status) if status.present? }
+  scope :last_week, ->(from_date, to_date) { where(updated_at: from_date..to_date) } # .. é uma delimitação de tempo entre um e outro
 
   private
 

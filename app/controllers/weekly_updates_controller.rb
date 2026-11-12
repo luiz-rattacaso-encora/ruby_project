@@ -9,9 +9,11 @@ class WeeklyUpdatesController < ApplicationController
   before_action :authorize_weekly_update_modification!, only: [ :edit, :update, :destroy ]
 
   def index
-    @weekly_updates = @team.weekly_updates.includes(:author)
-    @weekly_updates = @weekly_updates.by_author_name(params[:author_name])
-    @weekly_updates = @weekly_updates.by_status(params[:status])
+    time_between ={
+      beginning: DateTime.now.beginning_of_week,
+      now: DateTime.now
+    }
+    @weekly_updates = @team.weekly_updates.includes(:author).by_author_name(params[:author_name]).by_status(params[:status]).last_week(time_between["beginning"], time_between["now"])
 
     respond_to do |format|
       format.html
@@ -99,14 +101,6 @@ class WeeklyUpdatesController < ApplicationController
   end
 
   def authorize_team_access!
-    unless Current.user
-      respond_to do |format|
-        format.html { redirect_to new_session_path, alert: "You must log in first." }
-        format.json { render json: { error: "Unauthorized" }, status: :unauthorized }
-      end
-      return
-    end
-
     policy = WeeklyUpdatePolicy.new(Current.user, @team)
     unless policy.can_view? || policy.can_create?
       respond_to do |format|
@@ -117,14 +111,6 @@ class WeeklyUpdatesController < ApplicationController
   end
 
   def authorize_weekly_update_view!
-    unless Current.user
-      respond_to do |format|
-        format.html { redirect_to new_session_path, alert: "You must log in first." }
-        format.json { render json: { error: "Unauthorized" }, status: :unauthorized }
-      end
-      return
-    end
-
     policy = WeeklyUpdatePolicy.new(Current.user, @weekly_update)
     unless policy.can_view?
       respond_to do |format|
@@ -135,14 +121,6 @@ class WeeklyUpdatesController < ApplicationController
   end
 
   def authorize_weekly_update_modification!
-    unless Current.user
-      respond_to do |format|
-        format.html { redirect_to new_session_path, alert: "You must log in first." }
-        format.json { render json: { error: "Unauthorized" }, status: :unauthorized }
-      end
-      return
-    end
-
     policy = WeeklyUpdatePolicy.new(Current.user, @weekly_update)
     unless policy.can_modify?
       respond_to do |format|
@@ -150,10 +128,6 @@ class WeeklyUpdatesController < ApplicationController
         format.json { render json: { error: "Forbidden" }, status: :forbidden }
       end
     end
-  end
-
-  def current_employee
-    Employee.find_by(user_id: Current.user.id)
   end
 
   def weekly_update_params
