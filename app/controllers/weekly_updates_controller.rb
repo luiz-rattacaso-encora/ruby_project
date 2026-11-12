@@ -1,4 +1,6 @@
 class WeeklyUpdatesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   before_action :set_team, only: [ :index, :new, :create ]
   before_action :set_weekly_update, only: [ :show, :edit, :update, :destroy ]
 
