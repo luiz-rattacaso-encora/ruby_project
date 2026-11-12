@@ -49,7 +49,17 @@ class EmployeesController < ApplicationController
     end
 
     def show
+        respond_to do |format|
+            if @employee
+                format.html
+                format.json { render json: @employee, status: :ok }
+            else
+                format.html { render :all, status: :not_found }
+                format.json { render json: @employee.errors, status: :not_found }
+            end
+        end
     end
+
 
     def hierarchy
     end
