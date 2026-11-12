@@ -2,31 +2,56 @@
 
 <%= link_to "New Weekly Update", new_team_weekly_update_path(@team), style: "display: inline-block; margin-bottom: 20px;" %>
 
+<%= form_with url: team_weekly_updates_path(@team), method: :get, local: true do |form| %>
+  <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: flex-end;">
+    <div>
+      <%= form.label :author_name, "Filter by Author:", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+      <%= form.text_field :author_name, value: params[:author_name], placeholder: "Type a name...", style: "padding: 5px; width: 200px;" %>
+    </div>
+
+    <div>
+      <%= form.label :status, "Filter by Status:", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+      <%= form.select :status, WeeklyUpdate.statuses.keys.map { |s| [s.humanize, s] }, { include_blank: "All Statuses", selected: params[:status] }, { style: "padding: 5px;" } %>
+    </div>
+
+    <div>
+      <%= form.submit "Filter", style: "padding: 5px 10px; cursor: pointer;" %>
+      <% if params[:author_name].present? || params[:status].present? %>
+        <%= link_to "Clear", team_weekly_updates_path(@team), style: "margin-left: 10px; color: red; text-decoration: none;" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 <% if @weekly_updates.any? %>
   <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
     <thead>
       <tr>
+        <th>Author</th>
         <th>Content</th>
         <th>Status</th>
+        <th>Published Date</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <% @weekly_updates.each do |update| %>
         <tr>
+          <td><%= update.author ? "#{update.author.first_name} #{update.author.last_name}" : "N/A" %></td>
           <td><%= auto_link(truncate(update.content, length: 100), html: { target: '_blank', rel: 'noopener' }) %></td>
           <td><span class="badge"><%= update.status.humanize %></span></td>
+          <td><%= update.published_date&.strftime("%d/%m/%Y %H:%M") || "-" %></td>
           <td>
             <%= link_to "Show", weekly_update_path(update) %> |
             <%= link_to "Edit", edit_weekly_update_path(update) %> |
-            <%= link_to "Delete", weekly_update_path(update), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+            <%= button_to "Delete", weekly_update_path(update), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <p>No weekly updates recorded for this team yet.</p>
+  <p>No weekly updates found.</p>
 <% end %>
 
 <br>

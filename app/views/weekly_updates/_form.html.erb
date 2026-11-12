@@ -1,4 +1,4 @@
-<%= form_with(model: @weekly_update.new_record? ? [@team, @weekly_update] : @weekly_update) do |form| %>
+<%= form_with(model: @weekly_update.persisted? ? @weekly_update : [@team, @weekly_update]) do |form| %>
   <% if @weekly_update.errors.any? %>
     <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
       <h2><%= pluralize(@weekly_update.errors.count, "error") %> prohibited this update from being saved:</h2>

@@ -150,6 +150,10 @@ class WeeklyUpdatesController < ApplicationController
     end
   end
 
+  def current_employee
+    Employee.find_by(user_id: Current.user.id)
+  end
+
   def weekly_update_params
     params.require(:weekly_update).permit(:content, :status)
   end
