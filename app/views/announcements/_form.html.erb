@@ -1,0 +1,41 @@
+<%= form_with(model: announcement, local: true) do |form| %>
+  <% if announcement.errors.any? %>
+    <div style="background: #f8d7da; color: #842029; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; border: 1px solid #f5c2c7;">
+      <h4 style="margin-top: 0; margin-bottom: 0.5rem;">
+        <%= pluralize(announcement.errors.count, "error") %> prohibited this announcement from being saved:
+      </h4>
+      <ul style="margin-bottom: 0; padding-left: 1.25rem;">
+        <% announcement.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="margin-bottom: 1.25rem;">
+    <%= form.label :team_id, "Team", style: "display: block; font-weight: bold; margin-bottom: 0.4rem;" %>
+    <%= form.collection_select :team_id, @teams, :id, :name,
+        { prompt: "Select one of your teams" },
+        { required: true, style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6px; background: #fff;" } %>
+  </div>
+
+  <div style="margin-bottom: 1.25rem;">
+    <%= form.label :title, "Title", style: "display: block; font-weight: bold; margin-bottom: 0.4rem;" %>
+    <%= form.text_field :title, placeholder: "e.g., Quarterly goals update", required: true,
+        style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box;" %>
+  </div>
+
+  <div style="margin-bottom: 1.5rem;">
+    <%= form.label :content, "Content", style: "display: block; font-weight: bold; margin-bottom: 0.4rem;" %>
+    <%= form.text_area :content, rows: 6, placeholder: "Write the announcement details for the company...", required: true,
+        style: "width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box; font-family: inherit;" %>
+  </div>
+
+  <div style="display: flex; gap: 0.75rem; align-items: center;">
+    <%= form.submit announcement.new_record? ? "Post Announcement" : "Save Changes",
+        style: "background: #0d6efd; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;" %>
+
+    <%= link_to "Cancel", announcements_path,
+        style: "padding: 10px 16px; color: #6c757d; text-decoration: none;" %>
+  </div>
+<% end %>
