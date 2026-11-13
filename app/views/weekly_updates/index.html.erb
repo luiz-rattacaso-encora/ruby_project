@@ -1,58 +1,95 @@
-<h1>Team Weekly Updates: <%= @team.name %></h1>
-
-<%= link_to "New Weekly Update", new_team_weekly_update_path(@team), style: "display: inline-block; margin-bottom: 20px;" %>
-
-<%= form_with url: team_weekly_updates_path(@team), method: :get, local: true do |form| %>
-  <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: flex-end;">
-    <div>
-      <%= form.label :author_name, "Filter by Author:", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
-      <%= form.text_field :author_name, value: params[:author_name], placeholder: "Type a name...", style: "padding: 5px; width: 200px;" %>
-    </div>
-
-    <div>
-      <%= form.label :status, "Filter by Status:", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
-      <%= form.select :status, WeeklyUpdate.statuses.keys.map { |s| [s.humanize, s] }, { include_blank: "All Statuses", selected: params[:status] }, { style: "padding: 5px;" } %>
-    </div>
-
-    <div>
-      <%= form.submit "Filter", style: "padding: 5px 10px; cursor: pointer;" %>
-      <% if params[:author_name].present? || params[:status].present? %>
-        <%= link_to "Clear", team_weekly_updates_path(@team), style: "margin-left: 10px; color: red; text-decoration: none;" %>
-      <% end %>
-    </div>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to #{ @team.name }", team_path(@team) %>
   </div>
-<% end %>
 
-<% if @weekly_updates.any? %>
-  <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-    <thead>
-      <tr>
-        <th>Author</th>
-        <th>Content</th>
-        <th>Status</th>
-        <th>Published Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @weekly_updates.each do |update| %>
-        <tr>
-          <td><%= update.author ? "#{update.author.first_name} #{update.author.last_name}" : "N/A" %></td>
-          <td><%= auto_link(truncate(update.content, length: 100), html: { target: '_blank', rel: 'noopener' }) %></td>
-          <td><span class="badge"><%= update.status.humanize %></span></td>
-          <td><%= update.published_date&.strftime("%d/%m/%Y %H:%M") || "-" %></td>
-          <td>
-            <%= link_to "Show", weekly_update_path(update) %> |
-            <%= link_to "Edit", edit_weekly_update_path(update) %> |
-            <%= button_to "Delete", weekly_update_path(update), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No weekly updates found.</p>
-<% end %>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Team Weekly Updates: <%= @team.name %></h1>
+      <p class="page-subtitle">Progress reports and status updates for this team</p>
+    </div>
 
-<br>
-<%= link_to "Back to Team", team_path(@team) %>
+    <div class="header-actions">
+      <%= link_to "+ New Weekly Update", new_team_weekly_update_path(@team), class: "btn btn-primary" %>
+    </div>
+  </header>
+
+  <section class="filter-box">
+    <%= form_with url: team_weekly_updates_path(@team), method: :get, local: true, class: "filter-form" do |form| %>
+      <div style="flex: 1; min-width: 200px;">
+        <%= form.label :author_name, "Filter by Author", class: "form-label" %>
+        <%= form.text_field :author_name, value: params[:author_name], placeholder: "Type a name...", class: "form-control" %>
+      </div>
+
+      <div style="flex: 1; min-width: 180px;">
+        <%= form.label :status, "Filter by Status", class: "form-label" %>
+        <%= form.select :status,
+            WeeklyUpdate.statuses.keys.map { |s| [s.humanize, s] },
+            { include_blank: "All Statuses", selected: params[:status] },
+            { class: "form-control" } %>
+      </div>
+
+      <div class="header-actions">
+        <%= form.submit "Filter", class: "btn btn-dark" %>
+        <% if params[:author_name].present? || params[:status].present? %>
+          <%= link_to "Clear", team_weekly_updates_path(@team), class: "link-muted" %>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+
+  <% if @weekly_updates.any? %>
+    <div class="table-card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Author</th>
+            <th>Content</th>
+            <th>Status</th>
+            <th>Published Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @weekly_updates.each do |update| %>
+            <tr>
+              <td style="white-space: nowrap; font-weight: 500;">
+                <%= update.author ? "#{update.author.first_name} #{update.author.last_name}" : "N/A" %>
+              </td>
+
+              <td class="content-body">
+                <%= auto_link(truncate(update.content, length: 100), html: { target: '_blank', rel: 'noopener' }) %>
+              </td>
+
+              <td>
+                <% badge_class = update.status == "published" ? "badge-success" : "badge-warning" %>
+                <span class="badge <%= badge_class %>"><%= update.status.humanize %></span>
+              </td>
+
+              <td style="white-space: nowrap; color: #6c757d; font-size: 0.875rem;">
+                <%= update.published_date&.strftime("%d/%m/%Y %H:%M") || "-" %>
+              </td>
+
+              <td>
+                <div class="table-actions">
+                  <%= link_to "Show", weekly_update_path(update), class: "btn btn-outline btn-sm" %>
+                  <%= link_to "Edit", edit_weekly_update_path(update), class: "btn btn-outline btn-sm" %>
+                  <%= button_to "Delete", weekly_update_path(update),
+                      method: :delete,
+                      form: { style: "display: inline;" },
+                      data: { turbo_confirm: "Are you sure you want to delete this weekly update?" },
+                      class: "btn btn-danger-outline btn-sm" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p>No weekly updates found.</p>
+      <small>Try adjusting your filters or create the first update for <%= @team.name %>.</small>
+    </div>
+  <% end %>
+</div>

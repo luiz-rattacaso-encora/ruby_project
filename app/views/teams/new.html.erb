@@ -1,11 +1,16 @@
 <% content_for :title, "New team" %>
 
-<h1>New team</h1>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to Teams", teams_path %>
+  </div>
 
-<%= render "form", team: @team %>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">New Team</h1>
+      <p class="page-subtitle">Create a new team and define its tech stack</p>
+    </div>
+  </header>
 
-<br>
-
-<div>
-  <%= link_to "Back to teams", teams_path %>
+  <%= render "form", team: @team %>
 </div>

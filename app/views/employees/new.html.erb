@@ -1,75 +1,88 @@
-<h2>Form to new employee</h2>
-
-<%= form_with model: @employee, data: { turbo: false } do |f| %>
-
-  <p>
-    <%= f.label :first_name, "First name:" %>
-    <%= f.text_field :first_name %>
-  </p>
-  <% if @employee.errors[:first_name].any? %>
-    <div style="color: red; font-size: 0.85rem; margin-top: -10px; margin-bottom: 10px;">
-      <%= @employee.errors.full_messages_for(:first_name).join(", ") %>
-    </div>
-  <% end %>
-
-  <p>
-    <%= f.label :last_name, "Last name:" %>
-    <%= f.text_field :last_name %>
-  </p>
-  <% if @employee.errors[:last_name].any? %>
-    <div style="color: red; font-size: 0.85rem; margin-top: -10px; margin-bottom: 10px;">
-      <%= @employee.errors.full_messages_for(:last_name).join(", ") %>
-    </div>
-  <% end %>
-
-  <%= f.fields_for :user do |user_fields| %>
-    <p>
-      <%= user_fields.label :email_address, "Email Address:" %>
-      <%= user_fields.email_field :email_address %>
-    </p>
-    <% if @employee.errors["user.email_address"].any? %>
-      <div style="color: red; font-size: 0.85rem; margin-top: -10px; margin-bottom: 10px;">
-        Email <%= @employee.errors["user.email_address"].join(", ") %>
-      </div>
-    <% end %>
-
-    <p>
-      <%= user_fields.label :password, "Password:" %>
-      <%= user_fields.password_field :password, placeholder: "Leave empty to use default password" %>
-    </p>
-
-    <p>
-      <%= user_fields.label :password_confirmation, "Confirm Password:" %>
-      <%= user_fields.password_field :password_confirmation %>
-    </p>
-  <% end %>
-
-  <p>
-    <%= f.label :role, "Role:" %>
-    <%= f.text_field :role %>
-  </p>
-  <% if @employee.errors[:role].any? %>
-    <div style="color: red; font-size: 0.85rem; margin-top: -10px; margin-bottom: 10px;">
-      <%= @employee.errors.full_messages_for(:role).join(", ") %>
-    </div>
-  <% end %>
-
-  <p>
-    <%= f.label :is_manager, "Is this employee a manager?" %><br>
-    <%= f.radio_button :is_manager, true %>
-    <%= f.label :is_manager_true, "Yes" %>
-    
-    <%= f.radio_button :is_manager, false, checked: true %>
-    <%= f.label :is_manager_false, "No" %>
-  </p>
-
-  <div class="field">
-    <%= f.label :manager_id, "Select Manager" %>
-    <%= f.collection_select :manager_id, @manager, :id, :full_name_with_role , include_blank: "Not defined" %>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to All Employees", "/employees/all" %>
   </div>
 
-  <p>
-    <%= f.submit %>
-  </p>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">New Employee</h1>
+      <p class="page-subtitle">Create a new team member profile and user account</p>
+    </div>
+  </header>
 
-<% end %>
+  <div class="form-card">
+    <%= form_with model: @employee, data: { turbo: false } do |f| %>
+      <div class="form-row">
+        <div class="form-group">
+          <%= f.label :first_name, "First name", class: "form-label" %>
+          <%= f.text_field :first_name, class: "form-control" %>
+          <% if @employee.errors[:first_name].any? %>
+            <div class="field-error"><%= @employee.errors.full_messages_for(:first_name).join(", ") %></div>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :last_name, "Last name", class: "form-label" %>
+          <%= f.text_field :last_name, class: "form-control" %>
+          <% if @employee.errors[:last_name].any? %>
+            <div class="field-error"><%= @employee.errors.full_messages_for(:last_name).join(", ") %></div>
+          <% end %>
+        </div>
+      </div>
+
+      <%= f.fields_for :user do |user_fields| %>
+        <div class="form-group">
+          <%= user_fields.label :email_address, "Email Address", class: "form-label" %>
+          <%= user_fields.email_field :email_address, class: "form-control", placeholder: "employee@company.com" %>
+          <% if @employee.errors["user.email_address"].any? %>
+            <div class="field-error">Email <%= @employee.errors["user.email_address"].join(", ") %></div>
+          <% end %>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <%= user_fields.label :password, "Password", class: "form-label" %>
+            <%= user_fields.password_field :password, placeholder: "Leave empty for default password", class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= user_fields.label :password_confirmation, "Confirm Password", class: "form-label" %>
+            <%= user_fields.password_field :password_confirmation, class: "form-control" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :role, "Role", class: "form-label" %>
+        <%= f.text_field :role, class: "form-control", placeholder: "e.g. Software Engineer" %>
+        <% if @employee.errors[:role].any? %>
+          <div class="field-error"><%= @employee.errors.full_messages_for(:role).join(", ") %></div>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :is_manager, "Is this employee a manager?", class: "form-label" %>
+        <div class="radio-group">
+          <label class="radio-option">
+            <%= f.radio_button :is_manager, true %> Yes
+          </label>
+          <label class="radio-option">
+            <%= f.radio_button :is_manager, false, checked: true %> No
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :manager_id, "Select Manager", class: "form-label" %>
+        <%= f.collection_select :manager_id, @manager, :id, :full_name_with_role,
+            { include_blank: "Not defined" },
+            { class: "form-control" } %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit "Create Employee", class: "btn btn-primary" %>
+        <%= link_to "Cancel", "/employees/all", class: "link-muted" %>
+      </div>
+    <% end %>
+  </div>
+</div>

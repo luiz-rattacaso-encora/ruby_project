@@ -1,17 +1,60 @@
-<h2>Hi, here is your direct employees</h2>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to Home", "/" %>
+  </div>
 
-<% @employees.team_members.each do |employee| %>
+  <header class="page-header">
     <div>
-        <%= link_to "/employees/#{employee.id}" do %>
-            <strong><%= employee.first_name %> <%= employee.last_name %></strong> - <%= employee.role %>
-        <% end %>
-        <p>Team Members (<%= employee.team_members.count %>): </p>
-        <ul>
-            <% employee.team_members.each do |member| %>
-                <li><%= member.first_name %> <%= member.last_name %> = <%= member.role %></li>
-            <% end %>
-        </ul>
-        <hr>
-        <br>
+      <h1 class="page-title">Your Direct Employees</h1>
+      <p class="page-subtitle">Team members reporting directly to you</p>
     </div>
-<% end %>
+
+    <div class="header-actions">
+      <%= link_to "All Employees", "/employees/all", class: "btn btn-outline" %>
+      <%= link_to "+ Add New Member", "/employees/new", class: "btn btn-primary" %>
+    </div>
+  </header>
+
+  <% if @employees.team_members.any? %>
+    <div class="card-stack">
+      <% @employees.team_members.each do |employee| %>
+        <article class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <%= link_to "#{employee.first_name} #{employee.last_name}", "/employees/#{employee.id}" %>
+            </h2>
+            <span class="badge badge-primary"><%= employee.role %></span>
+          </div>
+
+          <div class="team-section">
+            <p class="team-section-title">Team Members (<%= employee.team_members.count %>)</p>
+            <% if employee.team_members.any? %>
+              <ul class="member-pills">
+                <% employee.team_members.each do |member| %>
+                  <li class="member-pill">
+                    <strong><%= member.first_name %> <%= member.last_name %></strong> · <%= member.role %>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <small style="color: #6c757d;">No direct reports assigned.</small>
+            <% end %>
+          </div>
+
+          <footer class="card-footer">
+            <span>Direct Report</span>
+            <div class="card-footer-actions">
+              <%= link_to "View Profile", "/employees/#{employee.id}", class: "link-primary" %>
+              <%= link_to "Hierarchy", "/employees/#{employee.id}/hierarchy", class: "link-muted", style: "padding: 0;" %>
+            </div>
+          </footer>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p>You don't have any direct employees yet.</p>
+      <small>View all employees or add a new member to get started.</small>
+    </div>
+  <% end %>
+</div>

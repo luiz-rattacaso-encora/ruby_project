@@ -1,7 +1,18 @@
-<h1>Edit weekly update</h1>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to Team Updates", team_weekly_updates_path(@weekly_update.team) %>
+  </div>
 
-<%= render "form" %>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Edit Weekly Update</h1>
+      <p class="page-subtitle">Updating entry for <strong><%= @weekly_update.team.name %></strong></p>
+    </div>
 
-<br>
-<%= link_to "Check this Content", weekly_update_path(@weekly_update) %> |
-<%= link_to "Back to team list", team_weekly_updates_path(@weekly_update.team) %>
+    <div class="header-actions">
+      <%= link_to "View Details", weekly_update_path(@weekly_update), class: "btn btn-outline" %>
+    </div>
+  </header>
+
+  <%= render "form" %>
+</div>

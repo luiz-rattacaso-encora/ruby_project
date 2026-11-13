@@ -1,21 +1,46 @@
-<h2>Employee information <% :id %></h2>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to All Employees", "/employees/all" %>
+  </div>
 
-<%= link_to "Back", "/employees/all" %>
-<br>
-<%= link_to "Check Hierarchy", "/employees/#{@employee.id}/hierarchy" %>
-<br>
-<%= link_to "Edit", "/employees/#{@employee.id}/edit" %>
-<br>
-<%= button_to "Delete", @employee, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title"><%= @employee.first_name %> <%= @employee.last_name %></h1>
+      <p class="page-subtitle">Employee Profile #<%= @employee.id %></p>
+    </div>
 
-<div>
-    <p><strong><%= @employee.first_name %> <%= @employee.last_name %></strong> - <%= @employee.role %></p>
-    <p>Team Members (<%= @employee.team_members.count %>): </p>
-    <ul>
-        <% @employee.team_members.each do |member| %>
-            <li><%= member.first_name %> <%= member.last_name %> = <%= member.role %></li>
-        <% end %>
-    </ul>
-    <hr>
-    <br>
+    <div class="header-actions">
+      <%= link_to "Check Hierarchy", "/employees/#{@employee.id}/hierarchy", class: "btn btn-outline" %>
+      <%= link_to "Edit", "/employees/#{@employee.id}/edit", class: "btn btn-dark" %>
+      <%= button_to "Delete", @employee,
+          method: :delete,
+          form: { style: "display: inline;" },
+          data: { turbo_confirm: "Are you sure you want to delete this employee?" },
+          class: "btn btn-danger-outline" %>
+    </div>
+  </header>
+
+  <article class="card">
+    <div class="card-header">
+      <div>
+        <span style="font-size: 0.85rem; color: #6c757d; display: block; margin-bottom: 0.25rem;">Current Role</span>
+        <span class="badge badge-primary" style="font-size: 0.9rem;"><%= @employee.role %></span>
+      </div>
+    </div>
+
+    <div class="team-section">
+      <p class="team-section-title">Team Members (<%= @employee.team_members.count %>)</p>
+      <% if @employee.team_members.any? %>
+        <ul class="member-pills">
+          <% @employee.team_members.each do |member| %>
+            <li class="member-pill">
+              <strong><%= member.first_name %> <%= member.last_name %></strong> · <%= member.role %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p style="color: #6c757d; font-size: 0.9rem; margin: 0;">This employee has no direct team members.</p>
+      <% end %>
+    </div>
+  </article>
 </div>

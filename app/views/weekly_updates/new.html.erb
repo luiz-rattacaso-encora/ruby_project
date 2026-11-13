@@ -1,6 +1,14 @@
-<h1>New weekly update to <%= @team.name %> team</h1>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to Team Updates", team_weekly_updates_path(@team) %>
+  </div>
 
-<%= render "form" %>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">New Weekly Update</h1>
+      <p class="page-subtitle">Posting update to <strong><%= @team.name %></strong> team</p>
+    </div>
+  </header>
 
-<br>
-<%= link_to "Back to team updates list", team_weekly_updates_path(@team) %>
+  <%= render "form" %>
+</div>

@@ -1,57 +1,97 @@
-<h1>Memberships List</h1>
+<div class="app-container">
+  <% if flash[:notice] %>
+    <div class="alert alert-notice"><%= flash[:notice] %></div>
+  <% end %>
 
-<% if flash[:notice] %>
-  <div style="color: green; margin-bottom: 10px;"><%= flash[:notice] %></div>
-<% end %>
-<% if flash[:alert] %>
-  <div style="color: red; margin-bottom: 10px;"><%= flash[:alert] %></div>
-<% end %>
+  <% if flash[:alert] %>
+    <div class="alert alert-danger"><%= flash[:alert] %></div>
+  <% end %>
 
-<%= link_to "New Membership", new_membership_path, style: "display: inline-block; margin-bottom: 15px;" %>
-
-<%= form_with url: memberships_path, method: :get, local: true do |form| %>
-  <div style="margin-bottom: 20px;">
-    <%= form.label :search_name, "Search by employee name:", style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
-    <%= form.text_field :search_name, value: params[:search_name], placeholder: "Type an employee name...", style: "padding: 5px; width: 250px;" %>
-    <%= form.submit "Search", style: "padding: 5px 10px; cursor: pointer;" %>
-    
-    <% if params[:search_name].present? %>
-      <%= link_to "Clear", memberships_path, style: "margin-left: 10px; color: red; text-decoration: none;" %>
-    <% end %>
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to Home", "/" %>
   </div>
-<% end %>
 
-<table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: left;">
-  <thead>
-    <tr style="background-color: #f2f2f2;">
-      <th>Employee</th>
-      <th>Team</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @memberships.each do |membership| %>
-      <tr>
-        <td>
-          <%= link_to "#{membership.employee.first_name} #{membership.employee.last_name}", membership_path(membership) %>
-        </td>
-        
-        <td><%= membership.team.name %></td>
-        
-        <td>
-          <div class="actions" style="display: flex; gap: 10px; align-items: center;">
-            
-            <%= button_to "Edit", edit_membership_path(membership), class: "btn btn-primary" %>
-            
-            <% unless membership.finished_at.present? %>
-              <%= button_to "Finish Membership", membership_path(membership), 
-                            method: :delete, 
-                            data: { turbo_confirm: "Are you sure you want to finish this membership?" }, 
-                            class: "btn btn-danger" %>
-            <% end %>
-          </div>
-        </td>
-      </tr>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Memberships</h1>
+      <p class="page-subtitle">Manage employee team assignments and active memberships</p>
+    </div>
+
+    <div class="header-actions">
+      <%= link_to "+ New Membership", new_membership_path, class: "btn btn-primary" %>
+    </div>
+  </header>
+
+  <section class="filter-box">
+    <%= form_with url: memberships_path, method: :get, local: true, class: "filter-form" do |form| %>
+      <div style="flex: 1; min-width: 220px;">
+        <%= form.label :search_name, "Search by employee name", class: "form-label" %>
+        <%= form.text_field :search_name, value: params[:search_name], placeholder: "Type an employee name...", class: "form-control" %>
+      </div>
+
+      <div class="header-actions">
+        <%= form.submit "Search", class: "btn btn-dark" %>
+        <% if params[:search_name].present? %>
+          <%= link_to "Clear", memberships_path, class: "link-muted" %>
+        <% end %>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </section>
+
+  <% if @memberships.any? %>
+    <div class="table-card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Employee</th>
+            <th>Team</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @memberships.each do |membership| %>
+            <tr>
+              <td>
+                <%= link_to "#{membership.employee.first_name} #{membership.employee.last_name}",
+                    membership_path(membership),
+                    class: "link-primary" %>
+              </td>
+
+              <td>
+                <span class="badge badge-primary"><%= membership.team.name %></span>
+              </td>
+
+              <td>
+                <% if membership.finished_at.present? %>
+                  <span class="badge badge-neutral">Finished</span>
+                <% else %>
+                  <span class="badge" style="background: #d1e7dd; color: #0f5132;">Active</span>
+                <% end %>
+              </td>
+
+              <td>
+                <div class="table-actions">
+                  <%= link_to "Edit", edit_membership_path(membership), class: "btn btn-outline btn-sm" %>
+
+                  <% unless membership.finished_at.present? %>
+                    <%= button_to "Finish Membership", membership_path(membership),
+                        method: :delete,
+                        form: { style: "display: inline;" },
+                        data: { turbo_confirm: "Are you sure you want to finish this membership?" },
+                        class: "btn btn-danger-outline btn-sm" %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p>No memberships found.</p>
+      <small>Try adjusting your search or create a new team membership.</small>
+    </div>
+  <% end %>
+</div>

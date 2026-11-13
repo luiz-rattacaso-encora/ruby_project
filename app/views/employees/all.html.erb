@@ -1,41 +1,76 @@
-<h2>Employees (All)</h2>
-
-<br>
-<%= link_to "Back", "/" %>
-<br>
-<%= link_to "List of your team", "/employees" %>
-<br>
-<%= link_to "Add new member", "/employees/new" %>
-<br>
-
-<%= form_with url: "/employees/all", method: :get, local: true do |form| %>
-  <div style="margin-bottom: 20px;">
-    <%= form.label :search_name, "Search by name:", style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
-    <%= form.text_field :search_name, value: params[:search_name], placeholder: "Type a name...", style: "padding: 5px; width: 250px;" %>
-    <%= form.submit "Search", style: "padding: 5px 10px; cursor: pointer;" %>
-    
-    <% if params[:search_name].present? %>
-      <%= link_to "Clear", "/employees/all", style: "margin-left: 10px; color: red; text-decoration: none;" %>
-    <% end %>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to Home", "/" %>
   </div>
-<% end %>
 
-<% if @employees.present? %>
-  <% @employees.each do |employee| %>
-      <div>
-          <%= link_to "/employees/#{employee.id}" do %>
-              <strong><%= employee.first_name %> <%= employee.last_name %></strong> - <%= employee.role %>
-          <% end %>
-          <p>Team Members (<%= employee.team_members.count %>): </p>
-          <ul>
-              <% employee.team_members.each do |member| %>
-                  <li><%= member.first_name %> <%= member.last_name %> = <%= member.role %></li>
-              <% end %>
-          </ul>
-          <hr>
-          <br>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Employees (All)</h1>
+      <p class="page-subtitle">Company directory and reporting structures</p>
+    </div>
+
+    <div class="header-actions">
+      <%= link_to "Your Team", "/employees", class: "btn btn-outline" %>
+      <%= link_to "+ Add New Member", "/employees/new", class: "btn btn-primary" %>
+    </div>
+  </header>
+
+  <section class="filter-box">
+    <%= form_with url: "/employees/all", method: :get, local: true, class: "filter-form" do |form| %>
+      <div style="flex: 1; min-width: 220px;">
+        <%= form.label :search_name, "Search by name", class: "form-label" %>
+        <%= form.text_field :search_name, value: params[:search_name], placeholder: "Type a name...", class: "form-control" %>
       </div>
+
+      <div class="header-actions">
+        <%= form.submit "Search", class: "btn btn-dark" %>
+        <% if params[:search_name].present? %>
+          <%= link_to "Clear", "/employees/all", class: "link-muted" %>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+
+  <% if @employees.present? %>
+    <div class="card-stack">
+      <% @employees.each do |employee| %>
+        <article class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <%= link_to "#{employee.first_name} #{employee.last_name}", "/employees/#{employee.id}" %>
+            </h2>
+            <span class="badge badge-primary"><%= employee.role %></span>
+          </div>
+
+          <div class="team-section">
+            <p class="team-section-title">Team Members (<%= employee.team_members.count %>)</p>
+            <% if employee.team_members.any? %>
+              <ul class="member-pills">
+                <% employee.team_members.each do |member| %>
+                  <li class="member-pill">
+                    <strong><%= member.first_name %> <%= member.last_name %></strong> · <%= member.role %>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <small style="color: #6c757d;">No direct reports assigned.</small>
+            <% end %>
+          </div>
+
+          <footer class="card-footer">
+            <span>ID #<%= employee.id %></span>
+            <div class="card-footer-actions">
+              <%= link_to "View Profile", "/employees/#{employee.id}", class: "link-primary" %>
+              <%= link_to "Hierarchy", "/employees/#{employee.id}/hierarchy", class: "link-muted", style: "padding: 0;" %>
+            </div>
+          </footer>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p>No employees found for this search.</p>
+      <small>Try adjusting your search query or add a new team member.</small>
+    </div>
   <% end %>
-<% else %>
-  <p>No employees found for this search.</p>
-<% end %>
+</div>

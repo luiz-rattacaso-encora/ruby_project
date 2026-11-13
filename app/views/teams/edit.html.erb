@@ -1,12 +1,20 @@
 <% content_for :title, "Editing team" %>
 
-<h1>Editing team</h1>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to Teams", teams_path %>
+  </div>
 
-<%= render "form", team: @team %>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Editing Team</h1>
+      <p class="page-subtitle">Updating details for <strong><%= @team.name %></strong></p>
+    </div>
 
-<br>
+    <div class="header-actions">
+      <%= link_to "Show this team", @team, class: "btn btn-outline" %>
+    </div>
+  </header>
 
-<div>
-  <%= link_to "Show this team", @team %> |
-  <%= link_to "Back to teams", teams_path %>
+  <%= render "form", team: @team %>
 </div>
