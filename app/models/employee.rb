@@ -6,7 +6,9 @@ class Employee < ApplicationRecord
 
   has_many :team_members, class_name: "Employee", foreign_key: "manager_id"
   has_many :memberships, dependent: :destroy
+  has_many :active_memberships, -> { where(finished_at: nil) }, class_name: "Membership"
   has_many :teams, through: :memberships
+  has_many :active_teams, through: :active_memberships, source: :team
   has_many :weekly_updates, foreign_key: "author_id", dependent: :nullify
   has_many :announcements, dependent: :destroy
 
