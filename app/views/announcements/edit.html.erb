@@ -1,12 +1,12 @@
 <div style="max-width: 700px; margin: 2rem auto; font-family: sans-serif; color: #212529;">
   <div style="margin-bottom: 1.25rem;">
-    <%= link_to "← Voltar para o aviso", announcement_path(@announcement), style: "color: #0d6efd; text-decoration: none; font-size: 0.95rem;" %>
+    <%= link_to "← Back to announcement", announcement_path(@announcement), style: "color: #0d6efd; text-decoration: none; font-size: 0.95rem;" %>
   </div>
 
   <div style="background: #fff; border: 1px solid #dee2e6; border-radius: 8px; padding: 2rem;">
-    <h1 style="margin-top: 0; margin-bottom: 0.25rem; font-size: 1.5rem;">Editar Aviso</h1>
+    <h1 style="margin-top: 0; margin-bottom: 0.25rem; font-size: 1.5rem;">Edit Announcement</h1>
     <p style="margin-top: 0; margin-bottom: 1.5rem; color: #6c757d; font-size: 0.95rem;">
-      Atualize as informações do comunicado publicado no mural.
+      Update the details of the announcement posted on the board.
     </p>
 
     <%= render "form", announcement: @announcement %>

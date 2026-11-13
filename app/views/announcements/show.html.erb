@@ -6,17 +6,17 @@
   <% end %>
 
   <div style="margin-bottom: 1.25rem;">
-    <%= link_to "← Voltar para o Mural", announcements_path, style: "color: #0d6efd; text-decoration: none; font-size: 0.95rem;" %>
+    <%= link_to "← Back to Announcement Board", announcements_path, style: "color: #0d6efd; text-decoration: none; font-size: 0.95rem;" %>
   </div>
 
   <article style="background: #fff; border: 1px solid #dee2e6; border-radius: 8px; padding: 2rem;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
       <span style="background: #e7f1ff; color: #0d6efd; font-size: 0.85rem; font-weight: bold; padding: 4px 12px; border-radius: 999px;">
-        <%= @announcement.team&.name || "Comunicado Geral" %>
+        <%= @announcement.team&.name || "General Announcement" %>
       </span>
 
       <small style="color: #6c757d;">
-        Publicado em <%= l(@announcement.created_at, format: :long) %>
+        Posted on <%= l(@announcement.created_at, format: :long) %>
       </small>
     </div>
 
@@ -25,9 +25,9 @@
     </h1>
 
     <p style="margin: 0 0 1.5rem; color: #6c757d; font-size: 0.9rem;">
-      Por <strong><%= @announcement.author.name %></strong>
+      By <strong><%= @announcement.author.name %></strong>
       <% if @announcement.updated_at > @announcement.created_at + 1.minute %>
-        <span>(editado em <%= l(@announcement.updated_at, format: :short) %>)</span>
+        <span>(edited on <%= l(@announcement.updated_at, format: :short) %>)</span>
       <% end %>
     </p>
 
@@ -37,14 +37,14 @@
       <%= simple_format(@announcement.content) %>
     </div>
 
-    <% if AnnouncementPolicy.new(Current.user, @announcement).can_modify? %>
+    <% if AnnouncementPolicy.new(Current.user, announcement: @announcement).can_modify? %>
       <footer style="display: flex; gap: 1rem; align-items: center; border-top: 1px solid #e9ecef; margin-top: 2rem; padding-top: 1.25rem;">
-        <%= link_to "Editar Aviso", edit_announcement_path(@announcement),
+        <%= link_to "Edit Announcement", edit_announcement_path(@announcement),
             style: "background: #f8f9fa; color: #212529; border: 1px solid #ced4da; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 500;" %>
 
-        <%= button_to "Excluir Aviso", announcement_path(@announcement),
+        <%= button_to "Delete Announcement", announcement_path(@announcement),
             method: :delete,
-            form: { data: { turbo_confirm: "Tem certeza que deseja excluir este aviso permanentemente?" } },
+            form: { data: { turbo_confirm: "Are you sure you want to permanently delete this announcement?" } },
             style: "background: #dc3545; color: #fff; border: none; padding: 9px 16px; border-radius: 6px; cursor: pointer; font-weight: 500;" %>
       </footer>
     <% end %>
