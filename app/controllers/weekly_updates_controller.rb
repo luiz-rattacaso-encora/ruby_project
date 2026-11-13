@@ -131,6 +131,6 @@ class WeeklyUpdatesController < ApplicationController
   end
 
   def weekly_update_params
-    params.require(:weekly_update).permit(:content, :status)
+    params.expect(weekly_update: [ :content, :status ])
   end
 end
