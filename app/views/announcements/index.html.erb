@@ -1,0 +1,99 @@
+<div style="max-width: 860px; margin: 2rem auto; font-family: sans-serif; color: #212529;">
+  <% if notice.present? %>
+    <div style="background: #d1e7dd; color: #0f5132; padding: 0.85rem 1rem; border-radius: 6px; margin-bottom: 1.25rem; border: 1px solid #badbcc;">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <% if alert.present? %>
+    <div style="background: #f8d7da; color: #842029; padding: 0.85rem 1rem; border-radius: 6px; margin-bottom: 1.25rem; border: 1px solid #f5c2c7;">
+      <%= alert %>
+    </div>
+  <% end %>
+
+  <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <div>
+      <h1 style="margin: 0; font-size: 1.75rem;">Mural de Avisos</h1>
+      <p style="margin: 0.25rem 0 0; color: #6c757d; font-size: 0.95rem;">Comunicados e novidades dos times da empresa</p>
+    </div>
+
+    <% if AnnouncementPolicy.new(Current.user).can_access_new_form? %>
+      <%= link_to "+ Novo Aviso", new_announcement_path,
+          style: "background: #0d6efd; color: #fff; padding: 10px 18px; border-radius: 6px; text-decoration: none; font-weight: bold;" %>
+    <% end %>
+  </header>
+
+  <%# Barra de Filtros (conecta com os scopes .by_team e .by_author_name do controller) %>
+  <section style="background: #f8f9fa; padding: 1rem; border-radius: 8px; border: 1px solid #e9ecef; margin-bottom: 1.75rem;">
+    <%= form_with url: announcements_path, method: :get, local: true, style: "display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: flex-end;" do |f| %>
+      <div style="flex: 1; min-width: 180px;">
+        <%= f.label :team_id, "Filtrar por time", style: "display: block; font-size: 0.85rem; color: #495057; margin-bottom: 0.3rem;" %>
+        <%= f.select :team_id,
+            options_from_collection_for_select(Team.order(:name), :id, :name, params[:team_id]),
+            { include_blank: "Todos os times" },
+            { style: "width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 6px; background: #fff;" } %>
+      </div>
+
+      <div style="flex: 1; min-width: 200px;">
+        <%= f.label :author_name, "Buscar por autor", style: "display: block; font-size: 0.85rem; color: #495057; margin-bottom: 0.3rem;" %>
+        <%= f.text_field :author_name, value: params[:author_name], placeholder: "Nome do colaborador...",
+            style: "width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box;" %>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem;">
+        <%= f.submit "Filtrar", style: "background: #212529; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;" %>
+        <% if params[:team_id].present? || params[:author_name].present? %>
+          <%= link_to "Limpar", announcements_path, style: "padding: 8px 12px; color: #6c757d; text-decoration: none;" %>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+
+  <%# Feed do Mural %>
+  <% if @announcements.any? %>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <% @announcements.each do |announcement| %>
+        <article style="background: #fff; border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span style="background: #e7f1ff; color: #0d6efd; font-size: 0.8rem; font-weight: bold; padding: 4px 10px; border-radius: 999px;">
+              <%= announcement.team&.name || "Comunicado Geral" %>
+            </span>
+
+            <time style="font-size: 0.85rem; color: #6c757d;">
+              <%= l(announcement.created_at, format: :short) %>
+            </time>
+          </div>
+
+          <h2 style="margin: 0 0 0.75rem; font-size: 1.25rem;">
+            <%= link_to announcement.title, announcement_path(announcement), style: "color: #212529; text-decoration: none;" %>
+          </h2>
+
+          <div style="color: #495057; line-height: 1.6; margin-bottom: 1.25rem;">
+            <%= simple_format(truncate(announcement.content, length: 300)) %>
+          </div>
+
+          <footer style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f3f5; padding-top: 0.85rem; font-size: 0.875rem; color: #6c757d;">
+            <span>Publicado por <strong><%= announcement.author.name %></strong></span>
+
+            <div style="display: flex; gap: 1rem; align-items: center;">
+              <%= link_to "Ler completo", announcement_path(announcement), style: "color: #0d6efd; text-decoration: none;" %>
+
+              <% if AnnouncementPolicy.new(Current.user, announcement: announcement).can_modify? %>
+                <%= link_to "Editar", edit_announcement_path(announcement), style: "color: #495057; text-decoration: none;" %>
+                <%= button_to "Excluir", announcement_path(announcement),
+                    method: :delete,
+                    form: { style: "display: inline;", data: { turbo_confirm: "Tem certeza que deseja excluir este aviso?" } },
+                    style: "background: none; border: none; color: #dc3545; cursor: pointer; padding: 0; font-size: 0.875rem;" %>
+              <% end %>
+            </div>
+          </footer>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div style="text-align: center; padding: 3rem 1rem; background: #f8f9fa; border-radius: 8px; border: 1px dashed #ced4da; color: #6c757d;">
+      <p style="margin: 0 0 0.5rem; font-size: 1.1rem;">Nenhum aviso encontrado.</p>
+      <small>Tente ajustar os filtros ou publique o primeiro comunicado no mural.</small>
+    </div>
+  <% end %>
+</div>
