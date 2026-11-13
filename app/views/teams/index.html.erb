@@ -1,28 +1,51 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Teams" %>
 
-<h1>Teams</h1>
+<div class="app-container">
+  <% if notice.present? %>
+    <div class="alert alert-notice"><%= notice %></div>
+  <% end %>
 
-<%= form_with url: teams_path, method: :get, local: true do |form| %>
-  <div style="margin-bottom: 20px;">
-    <%= form.label :search_name, "Search by team name:", style: "display: block; margin-bottom: 5px; font-weight: bold;" %>
-    <%= form.text_field :search_name, value: params[:search_name], placeholder: "Type a team name...", style: "padding: 5px; width: 250px;" %>
-    <%= form.submit "Search", style: "padding: 5px 10px; cursor: pointer;" %>
-    
-    <% if params[:search_name].present? %>
-      <%= link_to "Clear", teams_path, style: "margin-left: 10px; color: red; text-decoration: none;" %>
-    <% end %>
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to Home", "/" %>
   </div>
-<% end %>
 
-<div id="teams">
-  <% @teams.each do |team| %>
-    <%= render team %>
-    <p>
-      <%= link_to "Show this team", team %>
-    </p>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Teams</h1>
+      <p class="page-subtitle">Departments, squads, and their tech stacks</p>
+    </div>
+
+    <div class="header-actions">
+      <%= link_to "+ New Team", new_team_path, class: "btn btn-primary" %>
+    </div>
+  </header>
+
+  <section class="filter-box">
+    <%= form_with url: teams_path, method: :get, local: true, class: "filter-form" do |form| %>
+      <div style="flex: 1; min-width: 220px;">
+        <%= form.label :search_name, "Search by team name", class: "form-label" %>
+        <%= form.text_field :search_name, value: params[:search_name], placeholder: "Type a team name...", class: "form-control" %>
+      </div>
+
+      <div class="header-actions">
+        <%= form.submit "Search", class: "btn btn-dark" %>
+        <% if params[:search_name].present? %>
+          <%= link_to "Clear", teams_path, class: "link-muted" %>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+
+  <% if @teams.any? %>
+    <div id="teams" class="card-stack">
+      <% @teams.each do |team| %>
+        <%= render team %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p>No teams found.</p>
+      <small>Try adjusting your search or create a new team.</small>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New team", new_team_path %>

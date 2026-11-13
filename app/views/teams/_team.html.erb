@@ -1,17 +1,37 @@
-<div id="<%= dom_id team %>">
-  <div>
-    <strong>Name:</strong>
-    <%= team.name %>
+<article id="<%= dom_id team %>" class="card">
+  <div class="card-header">
+    <h2 class="card-title">
+      <%= link_to team.name, team %>
+    </h2>
+    <span class="badge badge-neutral">Team #<%= team.id %></span>
   </div>
 
-  <div>
-    <strong>Description:</strong>
-    <%= team.description %>
+  <div class="content-body" style="margin-bottom: 1rem;">
+    <% if team.description.present? %>
+      <p style="margin: 0;"><%= team.description %></p>
+    <% else %>
+      <p style="margin: 0; color: #6c757d;">No description provided.</p>
+    <% end %>
   </div>
 
-  <div>
-    <strong>Technologies:</strong>
-    <%= team.technologies %>
-  </div>
+  <% if team.technologies.present? %>
+    <div class="team-section">
+      <p class="team-section-title">Technologies</p>
+      <ul class="member-pills">
+        <% team.technologies.split(",").map(&:strip).reject(&:blank?).each do |tech| %>
+          <li class="member-pill"><%= tech %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-</div>
+  <% unless current_page?(team_path(team)) %>
+    <footer class="card-footer">
+      <span><%= pluralize(team.memberships.count, "member") rescue "Team overview" %></span>
+      <div class="card-footer-actions">
+        <%= link_to "Weekly Updates", team_weekly_updates_path(team), class: "link-muted", style: "padding: 0;" %>
+        <%= link_to "Show this team", team, class: "link-primary" %>
+      </div>
+    </footer>
+  <% end %>
+</article>

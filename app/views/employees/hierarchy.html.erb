@@ -1,28 +1,34 @@
-<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; font-family: monospace; text-align: center;">
-  
-  <h1>Organizational Hierarchy</h1>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to All Employees", "/employees/all" %>
+  </div>
 
-  <div style="margin: 20px 0; width: 100%; max-width: 600px;">
-    <div style="margin-top: 20px;">
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Organizational Hierarchy</h1>
+      <p class="page-subtitle">Reporting chain for <%= @employee.first_name %> <%= @employee.last_name %></p>
+    </div>
+
+    <div class="header-actions">
+      <%= link_to "Edit Employee", edit_employee_path(@employee), class: "btn btn-outline" %>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="hierarchy-wrapper">
       <% @employee.reports_to.each do |manager| %>
-        <div style="margin-bottom: 5px;">
+        <div class="hierarchy-node">
           <%= link_to manager.full_name_with_role, employee_path(manager) %>
         </div>
-        <div style="color: #666; margin-bottom: 5px;">|</div>
-        <div style="color: #666; margin-bottom: 5px;">v</div>
+        <div class="hierarchy-connector">
+          <span>|</span>
+          <span>↓</span>
+        </div>
       <% end %>
 
-      <div style="font-weight: bold; background-color: #f0f0f0; padding: 6px 12px; display: inline-block; margin-top: 5px;">
-      ---> <%= @employee.full_name_with_role %>
+      <div class="hierarchy-node is-current">
+        <%= @employee.full_name_with_role %>
       </div>
     </div>
   </div>
-
-  <hr style="width: 100%; max-width: 400px; margin: 20px 0;">
-
-  <div>
-    <%= link_to "Edit", edit_employee_path(@employee) %> |
-    <%= link_to "Back", "/employees/all" %>
-  </div>
-
 </div>

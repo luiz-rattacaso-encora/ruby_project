@@ -1,30 +1,46 @@
-<h2>Add Employee to a Team (New Membership)</h2>
+<div class="app-container">
+  <div class="breadcrumb-nav">
+    <%= link_to "← Back to Memberships", memberships_path %>
+  </div>
 
-<%= form_with model: @membership, data: { turbo: false } do |f| %>
-
-  <% if @membership.errors.any? %>
-    <div style="color: red; margin-bottom: 20px;">
-      <h4>Oops! Something went wrong here:</h4>
-      <ul>
-        <% @membership.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Add Employee to a Team</h1>
+      <p class="page-subtitle">Assign an employee to a team membership</p>
     </div>
-  <% end %>
+  </header>
 
-  <p>
-    <%= f.label :employee_id, "Select Employee:" %>
-    <%= f.collection_select :employee_id, Employee.all, :id, :first_name, include_blank: "Select an employee..." %>
-  </p>
+  <div class="form-card">
+    <%= form_with model: @membership, data: { turbo: false } do |f| %>
+      <% if @membership.errors.any? %>
+        <div class="error-summary">
+          <h4 class="error-summary-title">Oops! Something went wrong here:</h4>
+          <ul>
+            <% @membership.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <p>
-    <%= f.label :team_id, "Select Team:" %>
-    <%= f.collection_select :team_id, Team.all, :id, :name, include_blank: "Select a team..." %>
-  </p>
+      <div class="form-group">
+        <%= f.label :employee_id, "Select Employee", class: "form-label" %>
+        <%= f.collection_select :employee_id, Employee.all, :id, :full_name_with_role,
+            { include_blank: "Select an employee..." },
+            { class: "form-control" } %>
+      </div>
 
-  <p>
-    <%= f.submit "Create Membership" %>
-  </p>
+      <div class="form-group">
+        <%= f.label :team_id, "Select Team", class: "form-label" %>
+        <%= f.collection_select :team_id, Team.all, :id, :name,
+            { include_blank: "Select a team..." },
+            { class: "form-control" } %>
+      </div>
 
-<% end %>
+      <div class="form-actions">
+        <%= f.submit "Create Membership", class: "btn btn-primary" %>
+        <%= link_to "Cancel", memberships_path, class: "link-muted" %>
+      </div>
+    <% end %>
+  </div>
+</div>

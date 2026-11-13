@@ -1,9 +1,50 @@
-<h1>Home Page</h1>
+<div class="app-container">
+  <% if notice.present? %>
+    <div class="alert alert-notice"><%= notice %></div>
+  <% end %>
 
-<%= link_to "List of Employees", "/employees/all" %>
-<br>
-<%= link_to "List of Teams", "/teams" %>
-<br>
-<%= link_to "See memberships", "/memberships" %>
-<br>
-<%= link_to "Set an announcement", "/announcements" %>
+  <% if alert.present? %>
+    <div class="alert alert-danger"><%= alert %></div>
+  <% end %>
+
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Home Page</h1>
+      <p class="page-subtitle">Workspace overview and quick navigation</p>
+    </div>
+  </header>
+
+  <div class="nav-grid">
+    <%= link_to "/employees/all", class: "nav-card" do %>
+      <div>
+        <h2 class="nav-card-title">Employees</h2>
+        <p class="nav-card-desc">Browse the company directory, roles, and reporting hierarchies.</p>
+      </div>
+      <span class="nav-card-action">List of Employees →</span>
+    <% end %>
+
+    <%= link_to "/teams", class: "nav-card" do %>
+      <div>
+        <h2 class="nav-card-title">Teams</h2>
+        <p class="nav-card-desc">Explore departments, tech stacks, and team weekly updates.</p>
+      </div>
+      <span class="nav-card-action">List of Teams →</span>
+    <% end %>
+
+    <%= link_to "/memberships", class: "nav-card" do %>
+      <div>
+        <h2 class="nav-card-title">Memberships</h2>
+        <p class="nav-card-desc">Manage employee assignments and active team allocations.</p>
+      </div>
+      <span class="nav-card-action">See memberships →</span>
+    <% end %>
+
+    <%= link_to "/announcements", class: "nav-card" do %>
+      <div>
+        <h2 class="nav-card-title">Announcements</h2>
+        <p class="nav-card-desc">Publish company-wide updates and read recent team news.</p>
+      </div>
+      <span class="nav-card-action">Set an announcement →</span>
+    <% end %>
+  </div>
+</div>
