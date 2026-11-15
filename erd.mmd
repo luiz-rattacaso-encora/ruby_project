@@ -1,0 +1,43 @@
+erDiagram
+	direction TB
+	Announcement {
+		text content
+		string title
+	}
+	Employee {
+		string first_name
+		boolean is_manager
+		string last_name
+		string role
+	}
+	Membership {
+		datetime finished_at
+	}
+	Session {
+		string ip_address
+		string user_agent
+	}
+	Team {
+		text description
+		string name
+		json technologies
+	}
+	User {
+		string email_address
+		string password_digest
+	}
+	WeeklyUpdate {
+		text content
+		datetime published_date
+		string status
+	}
+	Employee ||--}o Announcement : ""
+	Team o|--}o Announcement : ""
+	Employee o|--}o Employee : ""
+	User ||--|o Employee : ""
+	Employee ||--}o Membership : ""
+	Employee o|..}o Team : ""
+	Employee ||--}o WeeklyUpdate : ""
+	Team ||--}o Membership : ""
+	User ||--}o Session : ""
+	Team ||--}o WeeklyUpdate : ""

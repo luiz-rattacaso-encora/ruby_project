@@ -1,5 +1,5 @@
 class AnnouncementsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, if: -> { request.format.json? }
 
   before_action :set_current_employee
   before_action :set_announcement, only: [ :show, :edit, :update, :destroy ]
