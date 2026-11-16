@@ -11,8 +11,10 @@ class EmployeesController < ApplicationController
 
         respond_to do |format|
             if @employee
+                format.html
                 format.json { render json: @employee, status: :ok }
             else
+                format.html { redirect_to root_path, alert: "Employee not found." }
                 format.json { render json: { error: "Employee not found" }, status: :not_found }
             end
         end
