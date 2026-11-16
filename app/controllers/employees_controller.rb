@@ -41,7 +41,7 @@ class EmployeesController < ApplicationController
                 format.json { render json: @employee, status: :created }
                 format.html { redirect_to "/employees" }
             else
-            select_manager
+                select_manager
                 format.json { render json: @employee.errors, status: :unprocessable_entity }
                 format.html { render :new, status: :unprocessable_entity }
             end

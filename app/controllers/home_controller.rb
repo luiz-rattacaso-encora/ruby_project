@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
-    allow_unauthenticated_access only: %i[ index ]
-
     def index
+       @user = Employee.find_by(user_id: Current.user.id) if Current.user
     end
 end
