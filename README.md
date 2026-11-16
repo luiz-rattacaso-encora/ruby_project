@@ -31,7 +31,31 @@ bundle install
 
 ### 3. Database Configuration
 
-Create the database, run the migrations to build the tables (Users, Employees, Teams, etc.), and populate it with initial data if available.
+First, access your local MySQL server and create a dedicated database user with the required privileges:
+
+```bash
+sudo mysql -u root
+```
+
+Run the following SQL commands inside the MySQL prompt:
+
+```sql
+CREATE USER IF NOT EXISTS 'rails_user'@'127.0.0.1' IDENTIFIED BY 'Test1234';
+CREATE USER IF NOT EXISTS 'rails_user'@'localhost' IDENTIFIED BY 'Test1234';
+GRANT ALL PRIVILEGES ON *.* TO 'rails_user'@'127.0.0.1' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'rails_user'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EXIT;
+```
+
+Next, create a `.env` file in the root directory of the project and add your database credentials(like the example right below):
+
+```env
+DB_USERNAME="rails_user"
+DB_PASSWORD="Test1234"
+```
+
+Finally, create the database, run the migrations to build the tables (Users, Employees, Teams, etc.), and populate it with initial sample data:
 
 ```bash
 rails db:create
