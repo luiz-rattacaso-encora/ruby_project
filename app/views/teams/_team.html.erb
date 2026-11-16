@@ -18,7 +18,7 @@
     <div class="team-section">
       <p class="team-section-title">Technologies</p>
       <ul class="member-pills">
-        <% team.technologies.split(",").map(&:strip).reject(&:blank?).each do |tech| %>
+        <% Array(team.technologies).reject(&:blank?).each do |tech| %>
           <li class="member-pill"><%= tech %></li>
         <% end %>
       </ul>

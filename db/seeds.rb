@@ -5,6 +5,7 @@ Announcement.destroy_all
 WeeklyUpdate.destroy_all
 Membership.destroy_all
 Team.destroy_all
+Team.update_all(manager_id: nil)
 Employee.destroy_all
 User.destroy_all
 
@@ -133,20 +134,20 @@ assign_to_team(nate, team_warehouse)
 puts "Creating Announcements..."
 
 Announcement.create!(
-  employee: michael,
-  team: team_management, # Optional, depending on your strictness of the o|--}o relation
+  author: michael,
+  team: team_management,
   title: "Conference Room Meeting in 5 Minutes",
   content: "Everyone drop what you are doing and come to the conference room immediately. Mandatory attendance."
 )
 
 Announcement.create!(
-  employee: michael,
+  author: michael,
   title: "Today is Pretzel Day!",
   content: "Free pretzels are being served in the lobby. Do not cut in line."
 )
 
 Announcement.create!(
-  employee: michael,
+  author: michael,
   title: "Fire Safety Drill",
   content: "Please remain calm and follow Dwight's instructions during today's safety simulation."
 )
@@ -155,7 +156,7 @@ Announcement.create!(
 puts "Creating Weekly Updates..."
 
 WeeklyUpdate.create!(
-  employee: michael,
+  author: michael,
   team: team_sales,
   content: "Sales are up 5% this week! Great job everyone. Let's keep pushing paper.",
   published_date: Time.current,
@@ -163,7 +164,7 @@ WeeklyUpdate.create!(
 )
 
 WeeklyUpdate.create!(
-  employee: angela,
+  author: angela,
   team: team_accounting,
   content: "Please submit all expense reports by Friday at 5 PM. Kevin, double-check your math before submitting.",
   published_date: Time.current - 1.week,
