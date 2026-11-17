@@ -5,7 +5,7 @@ Announcement.destroy_all
 WeeklyUpdate.destroy_all
 Membership.destroy_all
 Team.destroy_all
-Team.update_all(manager_id: nil)
+Employee.update_all(manager_id: nil)
 Employee.destroy_all
 User.destroy_all
 
@@ -66,7 +66,7 @@ def hire_employee(first_name, last_name, role, is_manager, manager_record = nil)
     last_name: last_name,
     role: role,
     is_manager: is_manager,
-    employee_id: manager_record&.id # Reference for self-join. Might be manager_id depending on your model setup.
+    manager_id: manager_record&.id # Reference for self-join. Might be manager_id depending on your model setup.
   )
 end
 
