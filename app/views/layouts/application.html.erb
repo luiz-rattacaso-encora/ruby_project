@@ -24,19 +24,28 @@
   </head>
 
   <body>
+    <nav style="border-bottom: 1px solid #dee2e6; background-color: #ffffff; padding: 0.75rem 0;">
+      <div class="app-container" style="display: flex; justify-content: space-between; align-items: center; padding-top: 0; padding-bottom: 0;">
+        <%= link_to "Home", root_path, class: "link-primary", style: "font-weight: 600; text-decoration: none;" %>
+
+        <% if authenticated? %>
+          <%= button_to "Log out", session_path, method: :delete, class: "btn btn-outline", style: "padding: 0.35rem 0.75rem; font-size: 0.875rem;" %>
+        <% end %>
+      </div>
+    </nav>
+
     <% if flash.any? %>
-      <div id="flash-messages">
+      <div id="flash-messages" class="app-container" style="padding-bottom: 0;">
         <% flash.each do |type, message| %>
-          <div class=<"flash <%= type %>" style="padding: 10px; margin: 10px 0; border: 1px solid; <%= type.to_s == 'notice' ? 'color: green; background: #e6ffe6;' : 'color: red; background: #ffe6e6;' %>">
-            <%= message %>
+          <% is_notice = type.to_s == "notice" %>
+          <div class="card flash <%= type %>" style="padding: 0.875rem 1rem; margin-bottom: 0.5rem; border-left: 4px solid <%= is_notice ? '#198754' : '#dc3545' %>; background-color: <%= is_notice ? '#f8fff9' : '#fff8f8' %>;">
+            <small style="color: <%= is_notice ? '#198754' : '#dc3545' %>; font-weight: 500; font-size: 0.9rem;">
+              <%= message %>
+            </small>
           </div>
         <% end %>
       </div>
     <% end %>
-    <nav>
-      <%= link_to "Home", root_path %>
-      <%= button_to "Log out", session_path, method: :delete if authenticated? %>
-    </nav>
 
     <main>
       <%= yield %>
