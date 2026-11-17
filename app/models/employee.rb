@@ -4,7 +4,7 @@ class Employee < ApplicationRecord
   belongs_to :manager, class_name: "Employee", optional: true
   belongs_to :user, dependent: :destroy
 
-  has_many :team_members, class_name: "Employee", foreign_key: "manager_id"
+  has_many :team_members, class_name: "Employee", foreign_key: "manager_id", dependent: nullify
   has_many :memberships, dependent: :destroy
   has_many :active_memberships, -> { where(finished_at: nil) }, class_name: "Membership"
   has_many :teams, through: :memberships
