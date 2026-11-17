@@ -8,6 +8,9 @@ class Team < ApplicationRecord
   has_many :announcements, dependent: :destroy
 
   attribute :technologies, :json, default: []
+  normalizes :technologies, with: ->(value) {
+  value.is_a?(String) ? value.split(",").map(&:strip).reject(&:blank?) : value
+  }
 
   scope :by_name, ->(name) { where("name LIKE ?", "%#{name}%") if name.present? }
 end

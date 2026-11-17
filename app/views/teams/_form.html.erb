@@ -24,8 +24,10 @@
     </div>
 
     <div class="form-group">
-      <%= form.label :technologies, "Technologies", class: "form-label" %>
-      <%= form.text_field :technologies, class: "form-control", placeholder: "e.g. Ruby on Rails, PostgreSQL, React" %>
+      <%= form.text_field :technologies,
+        value: Array(form.object.technologies).join(", "),
+        class: "form-control",
+        placeholder: "e.g. Ruby on Rails, PostgreSQL, React" %>
     </div>
 
     <div class="form-actions">
