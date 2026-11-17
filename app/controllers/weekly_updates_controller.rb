@@ -13,7 +13,7 @@ class WeeklyUpdatesController < ApplicationController
       beginning: DateTime.now.beginning_of_week,
       now: DateTime.now
     }
-    @weekly_updates = @team.weekly_updates.includes(:author).by_author_name(params[:author_name]).by_status(params[:status]).last_week(time_between["beginning"], time_between["now"])
+    @weekly_updates = @team.weekly_updates.includes(:author).by_author_name(params[:author_name]).by_status(params[:status]).last_week(time_between[:beginning], time_between[:now])
 
     respond_to do |format|
       format.html
