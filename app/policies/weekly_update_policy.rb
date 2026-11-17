@@ -15,7 +15,7 @@ class WeeklyUpdatePolicy
 
   def member_of_team?
     return false unless @current_employee && team
-    team.employees.include?(@current_employee)
+    team.memberships.where(finished_at: nil).exists?(employee_id: @current_employee.id)
   end
 
   def author_of_update?
