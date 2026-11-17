@@ -5,4 +5,13 @@ class ApplicationController < ActionController::Base
 
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
+
+  private
+  def require_manager!
+    return if Employee.exists?(user_id: Current.user&.id, is_manager: true)
+    respond_to do |format|
+    format.html { redirect_to root_path, alert: "Only managers can do this." }
+    format.json { render json: { error: "Forbidden" }, status: :forbidden }
+    end
+  end
 end

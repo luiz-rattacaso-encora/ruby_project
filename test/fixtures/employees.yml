@@ -6,6 +6,7 @@ one:
   role: MyString
   is_manager: true
   manager: one
+  user: one
 
 two:
   first_name: MyString
@@ -13,3 +14,4 @@ two:
   role: MyString
   is_manager: true
   manager: two
+  user: two
