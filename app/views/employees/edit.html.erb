@@ -29,24 +29,26 @@
         <%= f.text_field :role, class: "form-control" %>
       </div>
 
-      <div class="form-group">
-        <%= f.label :is_manager, "Is this employee a manager?", class: "form-label" %>
-        <div class="radio-group">
-          <label class="radio-option">
-            <%= f.radio_button :is_manager, true %> Yes
-          </label>
-          <label class="radio-option">
-            <%= f.radio_button :is_manager, false %> No
-          </label>
+      <% if EmployeePolicy.new(Current.user, @employee).is_manager? %>
+        <div class="form-group">
+          <%= f.label :is_manager, "Is this employee a manager?", class: "form-label" %>
+          <div class="radio-group">
+            <label class="radio-option">
+              <%= f.radio_button :is_manager, true %> Yes
+            </label>
+            <label class="radio-option">
+              <%= f.radio_button :is_manager, false %> No
+            </label>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <%= f.label :manager_id, "Select Manager", class: "form-label" %>
-        <%= f.collection_select :manager_id, @manager, :id, :full_name_with_role,
-            { include_blank: "Not defined" },
-            { class: "form-control" } %>
-      </div>
+        <div class="form-group">
+          <%= f.label :manager_id, "Select Manager", class: "form-label" %>
+          <%= f.collection_select :manager_id, @manager, :id, :full_name_with_role,
+              { include_blank: "Not defined" },
+              { class: "form-control" } %>
+        </div>
+      <% end %>
 
       <div class="form-actions">
         <%= f.submit "Save Changes", class: "btn btn-primary" %>

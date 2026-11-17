@@ -118,6 +118,11 @@ class EmployeesController < ApplicationController
     end
 
     def employee_params
-        params.expect(employee: [ :first_name, :last_name, :role, :is_manager, :manager_id, :user_id, user_attributes: [ :email_address, :password, :password_confirmation ] ])
+        permitted = [ :first_name, :last_name, :role ]
+
+        permitted += [ :is_manager, :manager_id ] if EmployeePolicy.new(Current.user, @employee).is_manager?
+
+        permitted << { user_attributes: [ :email_address, :password, :password_confirmation ] } if action_name == "create"
+        params.expect(employee: permitted)
     end
 end
