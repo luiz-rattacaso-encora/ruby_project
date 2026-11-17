@@ -10,7 +10,7 @@ class Announcement < ApplicationRecord
   scope :by_author_name, ->(name) {
     if name.present?
       # joins = inner join pq o "author" apenas aponta para a table mãe
-      joins(:author).where("CONCAT(employees.first_name, ' ', employees.last_name) ILIKE ?", "%#{name}%")
+      joins(:author).where("CONCAT(employees.first_name, ' ', employees.last_name) LIKE ?", "%#{name}%")
     end
   }
 
