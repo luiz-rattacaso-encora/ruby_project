@@ -2,6 +2,7 @@ class MembershipsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   before_action :set_member, only: [ :edit, :update, :show, :destroy ]
+  before_action :require_manager!, only: [ :new, :create, :edit, :update, :destroy ]
 
   def index
     @memberships = Membership.includes(:employee, :team).where(finished_at: nil)
