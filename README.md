@@ -5,9 +5,9 @@ The main goal of this project is to provide a centralized internal platform to m
 
 ## Prerequisites
 Before you begin, ensure you have the following installed on your local machine:
-* **Ruby** (v3.0.0 or higher recommended)
-* **Ruby on Rails** (v7.0 or higher)
-* **SQLite3** or **PostgreSQL** (depending on your database configuration)
+* **Ruby** (v3.4.11 or higher recommended)
+* **Ruby on Rails** (v8.0 or higher)
+* **MySQL 8**
 * **Git**
 
 ## Initial Setup
@@ -64,10 +64,18 @@ rails db:seed
 ```
 
 ### Create the First Admin User
+There is no public sign-up page. If you did not run the seeds, create the first manager in the Rails console:
 
-This application uses Rails' built-in authentication system. Since there is no public sign-up page, you must create the initial user manually through the Rails console.
+```bash
+    bin/rails console
+```
+```ruby
+    user = User.create!(email_address: "admin@company.com", password: "ChangeMe123!", password_confirmation: "ChangeMe123!")
+    Employee.create!(user: user, first_name: "Admin", last_name: "User", role: "Administrator", is_manager: true)
+```
+Log in with that email and password. From then on, managers create new
+employees (and their logins) at **Employees → + Add New Member**.
 
-Open the console:
 
 ### 4. Start the application
 
