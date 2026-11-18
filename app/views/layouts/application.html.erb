@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= content_for(:title) || "Ruby Project" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Ruby Project">
-    <meta name="mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= yield :head %>
+<head>
+  <title>
+    <%= content_for(:title) || "Ruby Project" %>
+  </title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Ruby Project">
+  <meta name="mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+  <%= yield :head %>
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+  <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+  <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
 
-  <body>
-    <% if flash.any? %>
-      <div id="flash-messages">
-        <% flash.each do |type, message| %>
-          <div class=<"flash <%= type %>" style="padding: 10px; margin: 10px 0; border: 1px solid; <%= type.to_s == 'notice' ? 'color: green; background: #e6ffe6;' : 'color: red; background: #ffe6e6;' %>">
-            <%= message %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-    <nav>
-      <%= link_to "Home", root_path %>
-      <%= button_to "Log out", session_path, method: :delete if authenticated? %>
+  <%# Includes all stylesheet files in app/assets/stylesheets %>
+  <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<body>
+  <% if authenticated? %>
+    <nav class="top-nav">
+      <%= link_to "Home", root_path, class: "top-nav-link" %>
+      <%= button_to "Log out", session_path, method: :delete, class: "btn btn-outline btn-sm" %>
     </nav>
+  <% end %>
 
-    <main>
-      <%= yield %>
-    </main>
-  </body>
+  <% if flash.any? %>
+    <div class="app-container flash-messages">
+      <% flash.each do |type, message| %>
+        <div class="alert <%= type.to_s == "notice" ? "alert-notice" : "alert-danger" %>">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <main>
+    <%= yield %>
+  </main>
+</body>
+
 </html>
