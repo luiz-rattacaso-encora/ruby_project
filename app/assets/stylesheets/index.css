@@ -629,3 +629,35 @@ textarea.form-control {
   font-weight: 600;
   color: var(--color-primary);
 }
+
+body {
+  margin: 0;
+}
+
+
+top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-sans);
+}
+.top-nav-link {
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+.top-nav form {
+margin: 0;
+}
+/* Coluna estreita e centralizada para login e senha */
+.auth-container {
+  max-width: 440px;
+  margin-top: 4rem;
+}
+.flash-messages {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}

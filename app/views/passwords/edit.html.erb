@@ -1,40 +1,27 @@
-<div class="app-container" style="max-width: 480px; margin: 0 auto;">
-  <div class="breadcrumb-nav">
-    <%= link_to "← Back to Sign In", new_session_path %>
-  </div>
+<% content_for :title, "New password" %>
 
+<div class="app-container auth-container">
   <header class="page-header">
     <div>
-      <h1 class="page-title">Update your password</h1>
-      <p class="page-subtitle">Choose a new secure password for your account</p>
+      <h1 class="page-title">Choose a new password</h1>
+      <p class="page-subtitle">You will be asked to sign in again afterwards</p>
     </div>
   </header>
-
-  <article class="card">
+  <div class="form-card">
     <%= form_with url: password_path(params[:token]), method: :put do |form| %>
-      <div style="margin-bottom: 1rem;">
-        <%= form.label :password, "New password", class: "form-label" %>
-        <%= form.password_field :password,
-            required: true,
-            autocomplete: "new-password",
-            placeholder: "Enter new password",
-            maxlength: 72,
-            class: "form-control" %>
+      <div class="form-group">
+        <%= form.label :password, "New password" , class: "form-label" %>
+          <%= form.password_field :password, required: true, autocomplete: "new-password" , maxlength: 72,
+            class: "formcontrol" %>
       </div>
-
-      <div style="margin-bottom: 1.5rem;">
-        <%= form.label :password_confirmation, "Confirm new password", class: "form-label" %>
-        <%= form.password_field :password_confirmation,
-            required: true,
-            autocomplete: "new-password",
-            placeholder: "Repeat new password",
-            maxlength: 72,
-            class: "form-control" %>
+      <div class="form-group">
+        <%= form.label :password_confirmation, "Repeat new password" , class: "form-label" %>
+          <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" , maxlength:
+            72, class: "form-control" %>
       </div>
-
-      <div class="header-actions">
-        <%= form.submit "Save", class: "btn btn-primary" %>
+      <div class="form-actions">
+        <%= form.submit "Save" , class: "btn btn-primary" %>
       </div>
-    <% end %>
-  </article>
+      <% end %>
+  </div>
 </div>
