@@ -94,3 +94,10 @@ Note on Login: Since the database was populated using the seed file, you can log
     Email: michael@michael.com
 
     Password: michael
+
+### 6. Next Steps and Improvements
+
+This project was built primarily for learning purposes, so I didn't consider it necessary to apply these hardening changes right away.
+
+- CSRF protection is currently disabled (skip_before_action :verify_authenticity_token) in EmployeesController, TeamsController, MembershipsController, WeeklyUpdatesController, and SessionsController (only: :create), leaving the app vulnerable to Cross-Site Request Forgery attacks.
+- When a manager creates an employee without a password, the default password is set to the employee's first name in app/models/employee.rb, which makes accounts easy to guess.
