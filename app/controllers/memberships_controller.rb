@@ -26,11 +26,11 @@ class MembershipsController < ApplicationController
 
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to memberships_path, notice: "Membership was successfully created." }
         format.json { render json: @membership, status: :created, location: @membership }
+        format.html { redirect_to memberships_path, notice: "Membership was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @membership.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -41,11 +41,11 @@ class MembershipsController < ApplicationController
   def update
     respond_to do |format|
       if @membership.update(membership_params)
-        format.html { redirect_to employee_path(@membership.employee_id), notice: "Membership was successfully updated." }
         format.json { render json: @membership, status: :ok }
+        format.html { redirect_to employee_path(@membership.employee_id), notice: "Membership was successfully updated." }
       else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @membership.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end
@@ -53,11 +53,11 @@ class MembershipsController < ApplicationController
   def destroy
     respond_to do |format|
       if @membership.update_column(:finished_at, Time.current)
-        format.html { redirect_to memberships_path, notice: "Membership was successfully finished." }
         format.json { head :no_content }
+        format.html { redirect_to memberships_path, notice: "Membership was successfully finished." }
       else
-        format.html { redirect_to memberships_path, alert: "Could not finish membership." }
         format.json { render json: { error: "Could not finish membership" }, status: :unprocessable_entity }
+        format.html { redirect_to memberships_path, alert: "Could not finish membership." }
       end
     end
   end

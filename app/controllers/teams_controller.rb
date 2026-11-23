@@ -32,11 +32,11 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to @team, notice: "Team was successfully created." }
         format.json { render :show, status: :created, location: @team }
+        format.html { redirect_to @team, notice: "Team was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_content }
         format.json { render json: @team.errors, status: :unprocessable_content }
+        format.html { render :new, status: :unprocessable_content }
       end
     end
   end
@@ -45,11 +45,11 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to @team, notice: "Team was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @team }
+        format.html { redirect_to @team, notice: "Team was successfully updated.", status: :see_other }
       else
-        format.html { render :edit, status: :unprocessable_content }
         format.json { render json: @team.errors, status: :unprocessable_content }
+        format.html { render :edit, status: :unprocessable_content }
       end
     end
   end
@@ -59,8 +59,8 @@ class TeamsController < ApplicationController
     @team.destroy!
 
     respond_to do |format|
-      format.html { redirect_to teams_path, notice: "Team was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
+      format.html { redirect_to teams_path, notice: "Team was successfully destroyed.", status: :see_other }
     end
   end
 

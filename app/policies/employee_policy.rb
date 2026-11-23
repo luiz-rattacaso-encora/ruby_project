@@ -26,7 +26,11 @@ class EmployeePolicy
     own_profile? || is_direct_manager_of?(@employee)
   end
 
-  def can_create_and_destroy?
+  def can_create?
     is_manager?
+  end
+
+  def can_destroy?
+     is_direct_manager_of?(@employee)
   end
 end
