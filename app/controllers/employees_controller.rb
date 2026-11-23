@@ -3,7 +3,8 @@ class EmployeesController < ApplicationController
 
     before_action :set_employee, only: [ :show, :edit, :update, :destroy, :hierarchy ]
     before_action :employee_is_allowed_to_edit?, only: [ :edit, :update ]
-    before_action :employee_is_allowed_to_create_and_destroy?, only: [ :new, :create, :destroy ]
+    before_action :employee_is_allowed_to_create?, only: [ :new, :create ]
+    before_action :employee_is_allowed_to_destroy?, only: [ :destroy ]
     before_action :select_manager, only: [ :new, :edit ]
 
     def index
@@ -105,9 +106,14 @@ class EmployeesController < ApplicationController
         deny_access("You are not allowed to update") unless policy.can_update?
     end
 
-    def employee_is_allowed_to_create_and_destroy?
+    def employee_is_allowed_to_create?
         policy = EmployeePolicy.new(Current.user, @employee)
-        deny_access("You are not allowed to create or delete an employee") unless policy.can_create_and_destroy?
+        deny_access("You are not allowed to create an employee") unless policy.can_create?
+    end
+
+    def employee_is_allowed_to_destroy?
+        policy = EmployeePolicy.new(Current.user, @employee)
+        deny_access("You are not allowed to delete an employee") unless policy.can_destroy?
     end
 
     def deny_access(message)
